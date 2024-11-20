@@ -6,3 +6,8 @@
     font-size: 100%;
     margin-left: 20%;
 }
+
+mat-toolbar{
+    background-color: #3584BC;
+    padding: 5px;
+}
