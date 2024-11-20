@@ -1,0 +1,46 @@
+<mat-toolbar color="primary">
+    <div>
+        <!-- menu Usuarios -->
+        <button mat-button [matMenuTriggerFor]="Usuariosmenu" aria-label="Example icon-button with a menu">
+            <mat-icon>account_box</mat-icon>
+            Usuarios
+        </button>
+        <mat-menu #Usuariosmenu="matMenu">
+            <button [routerLink]="'/'" mat-menu-item>
+                <mat-icon>account_circle</mat-icon>
+                Deportistas
+            </button>
+            <button [routerLink]="'/'" mat-menu-item>
+                <mat-icon>supervisor_account</mat-icon>
+                Entrenadores
+            </button>
+            <button [routerLink]="'/'" mat-menu-item>
+                <mat-icon>supervisor_account</mat-icon>
+                Administrativos
+            </button>
+        </mat-menu>
+
+        <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/'" >
+            <mat-icon>settings_applications</mat-icon>
+            Torneos
+        </button>
+        <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/'">
+            <mat-icon>settings_applications</mat-icon>
+            Entrenamientos
+        </button>
+        <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/'">
+            <mat-icon>settings_applications</mat-icon>
+            Reuniones
+        </button>
+        <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/'">
+            <mat-icon>settings_applications</mat-icon>
+            Club
+        </button>
+       
+    </div>
+    <span class="example-spacer"></span>
+    <!-- <mat-label>{{usuario?.nombres}} / {{usuario?.rol}}</mat-label> -->
+    <button mat-button matTooltip="Cerrar Sesión" (click)="cerrarSesion()">
+        <mat-icon>logout</mat-icon>
+    </button>
+</mat-toolbar>
