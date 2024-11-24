@@ -1,0 +1,38 @@
+<!-- <block-ui message="Por favor espere..."> -->
+    <div class="bootstrap-wrapper">
+        <div class="container">
+            <div class="row mt20">
+                <div class="offset-md-4">
+
+                    <mat-card class="example-card">
+                        <div class="container text-center">
+                            <img src="../../../assets/ICON-LOGIN.png" width="100" height="100">
+                        </div>
+
+                        <h1 class="text-center">Inicio de sesión</h1>
+
+                        <form [formGroup]="form1" (ngSubmit)="validar()">
+                            <!-- <form> -->
+                            <mat-card-content>
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Identificación</mat-label>
+                                    <input formControlName="identificacion" matInput placeholder="Digite su Identificación">
+                                </mat-form-field>
+                                <mat-form-field class="full-width" appearance="outline">
+                                    <mat-label>Clave</mat-label>
+                                    <input type="password" formControlName="clave" matInput placeholder="Digite su clave">
+                                </mat-form-field>
+                                <br>
+                                <div class="w-100">
+                                    <button type="submit" mat-raised-button color="primary" class="w-100">Iniciar sesión</button>
+                                </div>
+                            </mat-card-content>
+                        </form>
+                        <br>
+                    </mat-card>
+                    <br><br><br>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </block-ui> -->

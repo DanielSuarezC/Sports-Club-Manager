@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -26,12 +27,16 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import { LoginComponent } from './componentes/login/login.component';
+import { InicioComponent } from './componentes/inicio/inicio.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
-    HeaderComponent
+    HeaderComponent,
+    LoginComponent,
+    InicioComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +60,9 @@ import {MatSlideToggleModule} from '@angular/material/slide-toggle';
     MatDialogModule,
     MatListModule,
     MatTooltipModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
