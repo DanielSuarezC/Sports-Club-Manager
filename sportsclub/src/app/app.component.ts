@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { environment } from 'src/enviroments/environment';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +13,9 @@ export class AppComponent implements OnInit{
   menuselect = '';
 
   baseUrl = environment.urlAplicacion;
-  constructor(private cookieService: CookieService) {
+  // constructor(private cookieService: CookieService) {
 
-  }
+  // }
 
   ngOnInit(): void {
     //console.debug(window.location.toString());
@@ -26,24 +26,24 @@ export class AppComponent implements OnInit{
       window.location.toString() === this.baseUrl) {
       window.location.href = this.baseUrl + '#/login';
     } else {
-      const token = this.cookieService.get(environment.nombreCookieToken);
-      if (token === null || !token || token === undefined || token === '') {
-        window.location.href = this.baseUrl + '#/login';
-      } else {
-        console.log('here else')
-        // this.usuarioService.consultarUsuarioValidado().subscribe( value => {
-        //   if (value.isError === 'N') {
-        //     const usuario = value.datos as Usuario;
-        //     if (usuario === null || usuario.id === 0) {
-        //       window.location.href = this.baseUrl + '#/login';
-        //     }
-        //   } else {
-        //     window.location.href = this.baseUrl + '#/login';
-        //   }
-        // }, error => {
-        //   window.location.href = this.baseUrl + '#/login';
-        // });
-      }
+      // const token = this.cookieService.get(environment.nombreCookieToken);
+      // if (token === null || !token || token === undefined || token === '') {
+      //   window.location.href = this.baseUrl + '#/login';
+      // } else {
+      //   console.log('here else')
+      //   // this.usuarioService.consultarUsuarioValidado().subscribe( value => {
+      //   //   if (value.isError === 'N') {
+      //   //     const usuario = value.datos as Usuario;
+      //   //     if (usuario === null || usuario.id === 0) {
+      //   //       window.location.href = this.baseUrl + '#/login';
+      //   //     }
+      //   //   } else {
+      //   //     window.location.href = this.baseUrl + '#/login';
+      //   //   }
+      //   // }, error => {
+      //   //   window.location.href = this.baseUrl + '#/login';
+      //   // });
+      // }
     }
   }
 }
