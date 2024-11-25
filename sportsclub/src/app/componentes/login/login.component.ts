@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
+import { environment } from 'src/enviroments/environment';
 // import { CookieService } from 'ngx-cookie-service';
 
 @Component({
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit{
 
 
   constructor(private fb: FormBuilder,
-    private dialog: MatDialog, 
+    private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
@@ -46,6 +47,11 @@ export class LoginComponent implements OnInit{
     // this.blockUI.start();
     this.identificacion = this.form1.get('identificacion')?.value;
     this.clave = this.form1.get('clave')?.value;
+    if(this.identificacion == 'admin' && this.clave =='admin'){
+      window.location.href = environment.urlAplicacion + '#/inicio';
+    }else{
+      alert('usuario y contraseña incorrecto');
+    }
 //     this.usuarioService.autenticarUsuario(this.identificacion,CryptoJS.MD5(this.clave).toString(CryptoJS.enc.Hex)).subscribe( value => {
 //       console.log(value);
 //       if (value.isError === 'N') {
