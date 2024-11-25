@@ -28,6 +28,13 @@ body {
     text-align: center;
 }
 
+.bootstrap-wrapper {
+    height: 100vh; 
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+}
+
 .full-width{
     width: 96%;
     margin-left: 10px; 
@@ -57,7 +64,7 @@ body {
 .mr10{
     margin-right: 10% ;
 }
-.mlt10{
+.mt10{
     margin-top: 10px ;
 }
 .mb10{

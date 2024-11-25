@@ -18,17 +18,21 @@ export class AppComponent implements OnInit{
   // }
 
   ngOnInit(): void {
-    //console.debug(window.location.toString());
+    console.log(window.location.toString());
+    console.debug(window.location.toString());
     if (window.location.toString() === this.baseUrl + '#/login' ||
         window.location.toString() === this.baseUrl + '/login') {
-
+          console.log('entro al if 1');
     } else if (window.location.toString() === this.baseUrl + '#/' ||
       window.location.toString() === this.baseUrl) {
+      // window.location.href = this.baseUrl + '#/login';
+      console.log('entro al if 2');
       window.location.href = this.baseUrl + '#/login';
     } else {
       // const token = this.cookieService.get(environment.nombreCookieToken);
       // if (token === null || !token || token === undefined || token === '') {
-      //   window.location.href = this.baseUrl + '#/login';
+      //   console.log('entro al if 3');
+      //   window.location.href = this.baseUrl + '/login';
       // } else {
       //   console.log('here else')
       //   // this.usuarioService.consultarUsuarioValidado().subscribe( value => {

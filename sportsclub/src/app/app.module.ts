@@ -7,6 +7,8 @@ import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { HeaderComponent } from './componentes/header/header.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+// import { CookieService} from 'ngx-cookie-service';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
@@ -29,6 +31,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
+import { AutorizacionInterceptor } from './servicios/autorizacion.interceptor';
 
 @NgModule({
   declarations: [
@@ -64,7 +67,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [{provide: HTTP_INTERCEPTORS, useClass: AutorizacionInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

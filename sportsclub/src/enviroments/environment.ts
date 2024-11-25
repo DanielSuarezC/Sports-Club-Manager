@@ -5,7 +5,7 @@
 export const environment = {
   production: true,
   urlServices: 'http://localhost:8080/',
-  nombreCookieToken: 'token_consulting_admindoc',
+  nombreCookieToken: 'token',
   duracionMinutosCookieToken: 60,
   urlAplicacion: 'http://localhost:4200/'
 };

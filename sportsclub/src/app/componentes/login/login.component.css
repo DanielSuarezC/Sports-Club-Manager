@@ -1,0 +1,10 @@
+.example-card {
+    max-width: 400px;
+    display: flex;
+    align-items: center;
+  }
+  
+.center-container {
+    width: 100%; /* Opcional: ajusta según el diseño */
+    max-width: 400px; /* Limita el ancho del contenido */
+}
