@@ -34,6 +34,7 @@ import { InicioComponent } from './componentes/inicio/inicio.component';
 import { AutorizacionInterceptor } from './servicios/autorizacion/autorizacion.interceptor';
 import { ListaAdministrativoComponent } from './usuarios/administrativo/lista-administrativo/lista-administrativo.component';
 import { ListaDeportistaComponent } from './usuarios/deportista/lista-deportista/lista-deportista.component';
+import { ListaEntrenadorComponent } from './usuarios/entrenador/lista-entrenador/lista-entrenador.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { ListaDeportistaComponent } from './usuarios/deportista/lista-deportista
     LoginComponent,
     InicioComponent,
     ListaAdministrativoComponent,
-    ListaDeportistaComponent
+    ListaDeportistaComponent,
+    ListaEntrenadorComponent
   ],
   imports: [
     BrowserModule,

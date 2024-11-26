@@ -5,17 +5,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
-import { Deportista } from 'src/app/modelo/deportista/deportista';
+import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
+
 
 @Component({
-  selector: 'app-lista-deportista',
-  templateUrl: './lista-deportista.component.html',
-  styleUrls: ['./lista-deportista.component.css']
+  selector: 'app-lista-entrenador',
+  templateUrl: './lista-entrenador.component.html',
+  styleUrls: ['./lista-entrenador.component.css']
 })
-export class ListaDeportistaComponent implements OnInit{
+export class ListaEntrenadorComponent implements OnInit {
 
   displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
-  dataSource: MatTableDataSource<Deportista> =  new MatTableDataSource();
+  dataSource: MatTableDataSource<Entrenador> =  new MatTableDataSource();
   cantidadRegistros: number;
   
   form1: FormGroup;
@@ -76,13 +77,13 @@ export class ListaDeportistaComponent implements OnInit{
     }
   }
 
-  editar(row: Deportista){
+  editar(row: Entrenador){
     const navigationExtras: NavigationExtras = {
       state: {
         usuario: row
       }
     };
-    this.route.navigate(['/registro_administrativo'], navigationExtras);
+    this.route.navigate(['/'], navigationExtras);
   }
 
 
