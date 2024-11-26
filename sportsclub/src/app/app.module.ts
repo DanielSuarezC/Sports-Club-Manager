@@ -31,7 +31,9 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
-import { AutorizacionInterceptor } from './servicios/autorizacion.interceptor';
+import { AutorizacionInterceptor } from './servicios/autorizacion/autorizacion.interceptor';
+import { ListaAdministrativoComponent } from './usuarios/administrativo/lista-administrativo/lista-administrativo.component';
+import { ListaDeportistaComponent } from './usuarios/deportista/lista-deportista/lista-deportista.component';
 
 @NgModule({
   declarations: [
@@ -39,7 +41,9 @@ import { AutorizacionInterceptor } from './servicios/autorizacion.interceptor';
     NavbarComponent,
     HeaderComponent,
     LoginComponent,
-    InicioComponent
+    InicioComponent,
+    ListaAdministrativoComponent,
+    ListaDeportistaComponent
   ],
   imports: [
     BrowserModule,
