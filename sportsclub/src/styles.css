@@ -28,12 +28,6 @@ body {
     text-align: center;
 }
 
-.bootstrap-wrapper {
-    height: 100vh; 
-    display: flex;
-    justify-content: center; 
-    align-items: center; 
-}
 
 .full-width{
     width: 96%;

@@ -39,6 +39,10 @@ import { ListaClubComponent } from './club/lista-club/lista-club.component';
 import { ListaTorneoComponent } from './torneo/lista-torneo/lista-torneo.component';
 import { ListaEntrenamientoComponent } from './entrenamiento/lista-entrenamiento/lista-entrenamiento.component';
 import { ListaReunionComponent } from './reunion/lista-reunion/lista-reunion.component';
+import { RegistroAdministrativoComponent } from './usuarios/administrativo/registro-administrativo/registro-administrativo.component';
+import { RegistroDeportistaComponent } from './usuarios/deportista/registro-deportista/registro-deportista.component';
+import { RegistroEntrenadorComponent } from './usuarios/entrenador/registro-entrenador/registro-entrenador.component';
+import { RegistroClubComponent } from './club/registro-club/registro-club.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +57,11 @@ import { ListaReunionComponent } from './reunion/lista-reunion/lista-reunion.com
     ListaClubComponent,
     ListaTorneoComponent,
     ListaEntrenamientoComponent,
-    ListaReunionComponent
+    ListaReunionComponent,
+    RegistroAdministrativoComponent,
+    RegistroDeportistaComponent,
+    RegistroEntrenadorComponent,
+    RegistroClubComponent
   ],
   imports: [
     BrowserModule,
