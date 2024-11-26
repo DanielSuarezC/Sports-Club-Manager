@@ -5,17 +5,18 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
-import { Deportista } from 'src/app/modelo/deportista/deportista';
+import { Club } from 'src/app/modelo/club/club';
+
 
 @Component({
-  selector: 'app-lista-deportista',
-  templateUrl: './lista-deportista.component.html',
-  styleUrls: ['./lista-deportista.component.css']
+  selector: 'app-lista-club',
+  templateUrl: './lista-club.component.html',
+  styleUrls: ['./lista-club.component.css']
 })
-export class ListaDeportistaComponent implements OnInit{
+export class ListaClubComponent implements OnInit {
 
   displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
-  dataSource: MatTableDataSource<Deportista> =  new MatTableDataSource();
+  dataSource: MatTableDataSource<Club> =  new MatTableDataSource();
   cantidadRegistros: number;
   
   form1: FormGroup;
@@ -76,7 +77,7 @@ export class ListaDeportistaComponent implements OnInit{
     }
   }
 
-  editar(row: Deportista){
+  editar(row: Club){
     const navigationExtras: NavigationExtras = {
       state: {
         usuario: row
