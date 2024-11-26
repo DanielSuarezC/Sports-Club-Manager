@@ -10,6 +10,10 @@ import { ListaClubComponent } from './club/lista-club/lista-club.component';
 import { ListaTorneoComponent } from './torneo/lista-torneo/lista-torneo.component';
 import { ListaEntrenamientoComponent } from './entrenamiento/lista-entrenamiento/lista-entrenamiento.component';
 import { ListaReunionComponent } from './reunion/lista-reunion/lista-reunion.component';
+import { RegistroAdministrativoComponent } from './usuarios/administrativo/registro-administrativo/registro-administrativo.component';
+import { RegistroDeportistaComponent } from './usuarios/deportista/registro-deportista/registro-deportista.component';
+import { RegistroClubComponent } from './club/registro-club/registro-club.component';
+import { RegistroEntrenadorComponent } from './usuarios/entrenador/registro-entrenador/registro-entrenador.component';
 
 
 const routes: Routes = [
@@ -31,7 +35,7 @@ const routes: Routes = [
   },
   {
     path: 'lista-entrenador',
-    component: ListaEntrenadorComponent
+    component: ListaEntrenadorComponent,
   },
   {
     path: 'lista-club',
@@ -48,6 +52,22 @@ const routes: Routes = [
   {
     path: 'lista-reunion',
     component: ListaReunionComponent
+  },
+  {
+    path: 'registro-administrativo',
+    component: RegistroAdministrativoComponent
+  },
+  {
+    path: 'registro-deportista',
+    component: RegistroDeportistaComponent
+  },
+  {
+    path: 'registro-club',
+    component: RegistroClubComponent
+  },
+  {
+    path: 'registro-entrenador',
+    component: RegistroEntrenadorComponent
   }
 ];
 
