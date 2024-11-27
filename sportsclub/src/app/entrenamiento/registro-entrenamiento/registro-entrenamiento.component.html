@@ -1,7 +1,7 @@
 <!-- <block-ui message="Por favor espere..."> -->
     <div class="bootstrap-wrapper">
-        <div class="container">
-            <div class="row" style="margin-top:20px;">
+        <div class="center-container">
+            <div class="row">
                 <div class="offset">
 <!-- 
                 <div class="offset-md-4">     -->
@@ -12,7 +12,7 @@
                                 <br>
                                 <div class="text-center">
                                     <br>
-                                    <h3 class="text-center">Registro Deportista</h3>
+                                    <h3 class="text-center">Registro de entrenamientos</h3>
                                     <div class="container text-center">
                                         <img src="../../../assets/ICON.png" width="100" height="100">
                                     </div>
@@ -224,13 +224,45 @@
                                     </mat-form-field>
                                 </div>
                                 <div class="contenedorInterno"></div>
-                            
+                                <!-- <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Entidad de salud</mat-label>
+                                        <input formControlName="entidadSalud" matInput
+                                            placeholder="Digite su entidad de salud">
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Entidad de pensión</mat-label>
+                                        <input formControlName="entidadPension" matInput
+                                            placeholder="Digite su entidad de pensión">
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>ARL</mat-label>
+                                        <input formControlName="arl" matInput placeholder="Digite su ARL">
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Número</mat-label>
+                                        <input formControlName="numero" matInput placeholder="Digite su número ">
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Tipo de contrato</mat-label>
+                                        <input formControlName="tipoContrato" matInput
+                                            placeholder="Digite su tipo de contrato">
+                                    </mat-form-field>
+                                </div> -->
                                 <br>
                                 <button type="submit" mat-raised-button color="primary" >
                                     <mat-icon>save</mat-icon>
                                     Guardar
                                 </button>
-                                <button [routerLink]="'/lista-deportista'" type="reset" style="margin-left: 20px;" mat-raised-button color="accent">
+                                <button [routerLink]="'/lista-entrenamiento'" type="reset" style="margin-left: 20px;" mat-raised-button color="accent">
                                     <mat-icon>undo</mat-icon>
                                     Volver
                                 </button>

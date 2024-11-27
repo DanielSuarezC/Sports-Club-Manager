@@ -43,6 +43,10 @@ import { RegistroAdministrativoComponent } from './usuarios/administrativo/regis
 import { RegistroDeportistaComponent } from './usuarios/deportista/registro-deportista/registro-deportista.component';
 import { RegistroEntrenadorComponent } from './usuarios/entrenador/registro-entrenador/registro-entrenador.component';
 import { RegistroClubComponent } from './club/registro-club/registro-club.component';
+import { RegistroTorneoComponent } from './torneo/registro-torneo/registro-torneo.component';
+import { RegistroEntrenamientoComponent } from './entrenamiento/registro-entrenamiento/registro-entrenamiento.component';
+import { RegistroReunionComponent } from './reunion/registro-reunion/registro-reunion.component';
+import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +65,11 @@ import { RegistroClubComponent } from './club/registro-club/registro-club.compon
     RegistroAdministrativoComponent,
     RegistroDeportistaComponent,
     RegistroEntrenadorComponent,
-    RegistroClubComponent
+    RegistroClubComponent,
+    RegistroTorneoComponent,
+    RegistroEntrenamientoComponent,
+    RegistroReunionComponent,
+    MensajeComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +95,8 @@ import { RegistroClubComponent } from './club/registro-club/registro-club.compon
     MatTooltipModule,
     MatSlideToggleModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AutorizacionInterceptor, multi: true}],
   bootstrap: [AppComponent]

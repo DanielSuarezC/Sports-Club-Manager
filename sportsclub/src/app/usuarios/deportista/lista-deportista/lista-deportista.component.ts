@@ -14,7 +14,7 @@ import { Deportista } from 'src/app/modelo/deportista/deportista';
 })
 export class ListaDeportistaComponent implements OnInit{
 
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','categoria','elo','club','estado','icon'];
   dataSource: MatTableDataSource<Deportista> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -32,13 +32,12 @@ export class ListaDeportistaComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
+      cedula: [''],
       nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
-      estado: [''],
-      rol: ['']
+      categoria: [''],
+      estado: ['']
     })
-    this.consultarUsuarios();
+    // this.consultarUsuarios();
   }
 
   consultarUsuarios(): void {
