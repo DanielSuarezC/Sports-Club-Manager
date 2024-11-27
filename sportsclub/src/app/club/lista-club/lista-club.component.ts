@@ -15,7 +15,7 @@ import { Club } from 'src/app/modelo/club/club';
 })
 export class ListaClubComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['idclub', 'nombre', 'ciudad','direccion','telefono','icon'];
   dataSource: MatTableDataSource<Club> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -33,13 +33,11 @@ export class ListaClubComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
+      idclub: [''],
       nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
-      estado: [''],
-      rol: ['']
+      ciudad: ['']
     })
-    this.consultarUsuarios();
+    // this.consultarUsuarios();
   }
 
   consultarUsuarios(): void {

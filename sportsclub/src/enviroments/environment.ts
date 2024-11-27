@@ -4,7 +4,7 @@
 
 export const environment = {
   production: true,
-  urlServices: 'http://localhost:8080/',
+  urlServices: 'http://localhost/API/',
   nombreCookieToken: 'token',
   duracionMinutosCookieToken: 60,
   urlAplicacion: 'http://localhost:4200/'

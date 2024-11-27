@@ -14,6 +14,9 @@ import { RegistroAdministrativoComponent } from './usuarios/administrativo/regis
 import { RegistroDeportistaComponent } from './usuarios/deportista/registro-deportista/registro-deportista.component';
 import { RegistroClubComponent } from './club/registro-club/registro-club.component';
 import { RegistroEntrenadorComponent } from './usuarios/entrenador/registro-entrenador/registro-entrenador.component';
+import { RegistroTorneoComponent } from './torneo/registro-torneo/registro-torneo.component';
+import { RegistroEntrenamientoComponent } from './entrenamiento/registro-entrenamiento/registro-entrenamiento.component';
+import { RegistroReunionComponent } from './reunion/registro-reunion/registro-reunion.component';
 
 
 const routes: Routes = [
@@ -68,6 +71,18 @@ const routes: Routes = [
   {
     path: 'registro-entrenador',
     component: RegistroEntrenadorComponent
+  },
+  {
+    path: 'registro-torneo',
+    component: RegistroTorneoComponent
+  },
+  {
+    path: 'registro-entrenamiento',
+    component: RegistroEntrenamientoComponent
+  },
+  {
+    path: 'registro-reunion',
+    component: RegistroReunionComponent
   }
 ];
 
