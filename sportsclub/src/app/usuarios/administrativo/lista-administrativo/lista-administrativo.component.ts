@@ -13,7 +13,7 @@ import { Administrativo } from 'src/app/modelo/administrativo/administrativo';
   styleUrls: ['./lista-administrativo.component.css']
 })
 export class ListaAdministrativoComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','cargo','sueldo','club','estado','icon'];
   dataSource: MatTableDataSource<Administrativo> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -31,11 +31,10 @@ export class ListaAdministrativoComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
+      cedula: [''],
       nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
-      estado: [''],
-      rol: ['']
+      cargo: [''],
+      estado: ['']
     })
     this.consultarUsuarios();
   }
@@ -78,7 +77,7 @@ export class ListaAdministrativoComponent implements OnInit{
   editar(row: Administrativo){
     const navigationExtras: NavigationExtras = {
       state: {
-        usuario: row
+        administrativo: row
       }
     };
     this.route.navigate(['/registro_administrativo'], navigationExtras);

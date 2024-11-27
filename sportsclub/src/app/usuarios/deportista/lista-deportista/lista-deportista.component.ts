@@ -78,10 +78,10 @@ export class ListaDeportistaComponent implements OnInit{
   editar(row: Deportista){
     const navigationExtras: NavigationExtras = {
       state: {
-        usuario: row
+        Deportista: row
       }
     };
-    this.route.navigate(['/registro_administrativo'], navigationExtras);
+    this.route.navigate(['/registro_deportista'], navigationExtras);
   }
 
 
