@@ -13,7 +13,7 @@ import Swal from 'sweetalert2';
   templateUrl: './registro-club.component.html',
   styleUrls: ['./registro-club.component.css']
 })
-export class RegistroClubComponent implements OnInit{
+export class RegistroClubComponent implements OnInit,AfterViewInit{
   datoMaestro: Club = new Club();
   form1: FormGroup;
   // @BlockUI() blockUI: NgBlockUI;
@@ -21,7 +21,7 @@ export class RegistroClubComponent implements OnInit{
   constructor(private fb: FormBuilder, private clubService: ClubService, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
     const navigation = this.route.getCurrentNavigation();
     if (navigation?.extras.state) {
-      this.datoMaestro = navigation.extras.state['usuario'];
+      this.datoMaestro = navigation.extras.state['club'];
     }
   }
 
@@ -32,13 +32,12 @@ export class RegistroClubComponent implements OnInit{
     this.datoMaestro.ciudad = this.form1.get('ciudad')?.value;
     this.datoMaestro.direccion = this.form1.get('direccion')?.value;
     this.datoMaestro.telefono = this.form1.get('telefono')?.value;
-    this.datoMaestro.direccion = this.form1.get('direccion')?.value;
+
 
     this.clubService.guardarClub(this.datoMaestro).pipe().subscribe({
       next: (response) => {
         console.log('Respuesta del servidor:', response);
         Swal.fire('Club guardado', 'Información guardada correctamente', 'success')
-        // alert('Club registrado con éxito');
         this.form1.reset(); // Reiniciar el formulario
       },
       error: (err) => {
@@ -60,19 +59,31 @@ export class RegistroClubComponent implements OnInit{
       nombre: ['', Validators.required],
       ciudad: ['', Validators.required],
       direccion: ['', Validators.required],
-      telefono: ['', Validators.required],
+      telefono: ['', Validators.required]
     });
 
+    this.form1.get('idclub')?.disable();
   }
 
-  // ngAfterViewInit(): void {
-  //   setTimeout(() => {
-  //     this.llenarCamposUsuarios(this.datoMaestro);
-  //   });
-  // }
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.llenarCampos(this.datoMaestro);
+    });
+  }
 
   hasErrors(controlName: string, errorType: string) {
     return this.form1.get(controlName)?.hasError(errorType) && this.form1.get(controlName)?.touched
 
+  }
+
+  llenarCampos(row?: Club) {
+  
+    this.form1.patchValue({
+      idclub: row?.idclub || '',
+      nombre: row?.nombre || '',
+      ciudad: row?.ciudad || '',
+      direccion: row?.direccion || '',
+      telefono: row?.telefono || ''
+    });
   }
 }

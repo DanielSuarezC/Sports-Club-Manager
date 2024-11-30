@@ -17,6 +17,7 @@ import { RegistroEntrenadorComponent } from './usuarios/entrenador/registro-entr
 import { RegistroTorneoComponent } from './torneo/registro-torneo/registro-torneo.component';
 import { RegistroEntrenamientoComponent } from './entrenamiento/registro-entrenamiento/registro-entrenamiento.component';
 import { RegistroReunionComponent } from './reunion/registro-reunion/registro-reunion.component';
+import { DetallestorneoComponent } from './torneo/detallestorneo/detallestorneo.component';
 
 
 const routes: Routes = [
@@ -83,6 +84,10 @@ const routes: Routes = [
   {
     path: 'registro-reunion',
     component: RegistroReunionComponent
+  },
+  {
+    path: 'detalles-torneo',
+    component: DetallestorneoComponent
   }
 ];
 

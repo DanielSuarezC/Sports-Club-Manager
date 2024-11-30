@@ -47,6 +47,7 @@ import { RegistroTorneoComponent } from './torneo/registro-torneo/registro-torne
 import { RegistroEntrenamientoComponent } from './entrenamiento/registro-entrenamiento/registro-entrenamiento.component';
 import { RegistroReunionComponent } from './reunion/registro-reunion/registro-reunion.component';
 import { MensajeComponent } from './componentes/mensaje/mensaje.component';
+import { DetallestorneoComponent } from './torneo/detallestorneo/detallestorneo.component';
 
 @NgModule({
   declarations: [
@@ -69,7 +70,8 @@ import { MensajeComponent } from './componentes/mensaje/mensaje.component';
     RegistroTorneoComponent,
     RegistroEntrenamientoComponent,
     RegistroReunionComponent,
-    MensajeComponent
+    MensajeComponent,
+    DetallestorneoComponent
   ],
   imports: [
     BrowserModule,

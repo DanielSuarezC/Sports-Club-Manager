@@ -1,18 +1,26 @@
-import { AfterViewInit, ChangeDetectorRef, Component, Inject, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
-import { disableDebugTools } from '@angular/platform-browser';
-import { Router } from '@angular/router';
-import { Torneo } from 'src/app/modelo/torneo/torneo';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
+import { NavigationExtras, Router } from '@angular/router';
+import { Torneo } from '../../modelo/torneo/torneo';
+import { Deportista } from 'src/app/modelo/deportista/deportista';
 
 @Component({
-  selector: 'app-registro-torneo',
-  templateUrl: './registro-torneo.component.html',
-  styleUrls: ['./registro-torneo.component.css']
+  selector: 'app-detallestorneo',
+  templateUrl: './detallestorneo.component.html',
+  styleUrls: ['./detallestorneo.component.css']
 })
-export class RegistroTorneoComponent implements OnInit{
+export class DetallestorneoComponent {
+
   datoMaestro: Torneo = new Torneo();
   form1: FormGroup;
+
+  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','categoria','elo','club','estado','icon'];
+  dataSource: MatTableDataSource<Deportista> =  new MatTableDataSource();
+  cantidadRegistros: number;
   // @BlockUI() blockUI: NgBlockUI;
 
   // constructor(private fb: FormBuilder, private clubService: ClubService, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
@@ -21,7 +29,7 @@ export class RegistroTorneoComponent implements OnInit{
   //     this.datoMaestro = navigation.extras.state['usuario'];
   //   }
   // }
-    constructor(private fb: FormBuilder,private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(private fb: FormBuilder,private dialog: MatDialog, private route: Router) {
     const navigation = this.route.getCurrentNavigation();
     if (navigation?.extras.state) {
       this.datoMaestro = navigation.extras.state['torneo'];
@@ -62,9 +70,25 @@ export class RegistroTorneoComponent implements OnInit{
       idtorneo: ['', Validators.required],
       nombre: ['', Validators.required],
       modalidad: ['', Validators.required],
-      fecha: ['', Validators.required]
+      estado: [''],
+      fecha: ['', Validators.required],
+      horainicio : [''],
+      horafin:['']
     });
 
+  }
+
+  consultarUsuarios(){
+
+  }
+
+  editar(row: Deportista){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        Deportista: row
+      }
+    };
+    this.route.navigate(['/registro_deportista'], navigationExtras);
   }
 
   // ngAfterViewInit(): void {

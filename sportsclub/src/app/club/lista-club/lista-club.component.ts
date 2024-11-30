@@ -5,7 +5,10 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
+import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component';
 import { Club } from 'src/app/modelo/club/club';
+import { ClubService } from 'src/app/servicios/club/club.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -27,43 +30,80 @@ export class ListaClubComponent implements OnInit {
 
 
   // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private clubService: ClubService,private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
-      idclub: [''],
-      nombre: [''],
-      ciudad: ['']
+      idclub: [""],
+      nombre: [""],
+      ciudad: [""]
     })
-    // this.consultarUsuarios();
+    this.consultarClubes();
   }
 
-  consultarUsuarios(): void {
+  consultarClubes(): void {
     // this.blockUI.start();
-    
+
+    if(this.form1.get('idclub')?.value || this.form1.get('nombre')?.value || this.form1.get('ciudad')?.value){
+      console.log('here');
+      this.consultarClubesbyFilters();
+    }else{
+      this.clubService.consultarClubes()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          // console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+        }
+      });
+    }
+  }
+
+  consultarClubesbyFilters():void{
     const registroInicial = 0;
     const registrosPorPagina = 10;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    let idclub = 0;
+    let nombre = "";
+    let ciudad = "";
+
+    if(this.form1.get('idclub')?.value){
+      idclub = this.form1.get('idclub')?.value;
+    }else if(this.form1.get('nombre')?.value){
+      nombre = this.form1.get('nombre')?.value;
+    }else if(this.form1.get('ciudad')?.value){
+      ciudad = this.form1.get('ciudad')?.value;
+    }
+
+    let filtros = {
+      idclub: this.form1.get('idclub')?.value,
+      nombre: this.form1.get('nombre')?.value,
+      ciudad: this.form1.get('ciudad')?.value
+    }
+
+    this.clubService.consultarClubesbyFilters(idclub,nombre, ciudad, registroInicial,registrosPorPagina)
+    .subscribe({
+      next: (response) =>{
+        console.log(response);
+        this.dataSource.data = response.value // Asigna los datos a dataSource
+        // this.cantidadRegistros = response.value.length;
+        console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+      }
+    });
   }
 
   applyFilter(event: Event) {
@@ -78,10 +118,10 @@ export class ListaClubComponent implements OnInit {
   editar(row: Club){
     const navigationExtras: NavigationExtras = {
       state: {
-        usuario: row
+        club: row
       }
     };
-    this.route.navigate(['/registro_administrativo'], navigationExtras);
+    this.route.navigate(['/registro-club'], navigationExtras);
   }
 
 

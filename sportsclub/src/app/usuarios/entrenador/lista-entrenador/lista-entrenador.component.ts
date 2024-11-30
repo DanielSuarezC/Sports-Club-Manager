@@ -15,7 +15,7 @@ import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
 })
 export class ListaEntrenadorComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','titulo','elo','club','estado','icon'];
   dataSource: MatTableDataSource<Entrenador> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -33,11 +33,10 @@ export class ListaEntrenadorComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
+      cedula: [''],
       nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
-      estado: [''],
-      rol: ['']
+      titulo: [''],
+      estado: ['']
     })
     this.consultarUsuarios();
   }
@@ -80,10 +79,10 @@ export class ListaEntrenadorComponent implements OnInit {
   editar(row: Entrenador){
     const navigationExtras: NavigationExtras = {
       state: {
-        usuario: row
+        entrenador: row
       }
     };
-    this.route.navigate(['/'], navigationExtras);
+    this.route.navigate(['/registro-entrenador'], navigationExtras);
   }
 
 

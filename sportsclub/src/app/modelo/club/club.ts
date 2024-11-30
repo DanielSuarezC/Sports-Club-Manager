@@ -5,3 +5,8 @@ export class Club {
     direccion: string;
     telefono: string;
 }
+
+export interface ClubResponse{
+    value: Club[];
+}
+    

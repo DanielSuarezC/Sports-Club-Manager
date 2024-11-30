@@ -14,7 +14,7 @@ import { Torneo } from 'src/app/modelo/torneo/torneo';
   styleUrls: ['./lista-torneo.component.css']
 })
 export class ListaTorneoComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['idtorneo','nombre','fecha','modalidad','estado', 'detalles','icon'];
   dataSource: MatTableDataSource<Torneo> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -32,11 +32,11 @@ export class ListaTorneoComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
+      idtorneo: [''],
+      fecha: [''],
       nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
-      estado: [''],
-      rol: ['']
+      modalidad: [''],
+      estado: ['']
     })
     this.consultarUsuarios();
   }
@@ -79,10 +79,10 @@ export class ListaTorneoComponent implements OnInit{
   editar(row: Torneo){
     const navigationExtras: NavigationExtras = {
       state: {
-        usuario: row
+        torneo: row
       }
     };
-    this.route.navigate(['/'], navigationExtras);
+    this.route.navigate(['/registro-torneo'], navigationExtras);
   }
 
 
