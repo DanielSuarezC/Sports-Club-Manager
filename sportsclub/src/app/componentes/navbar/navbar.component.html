@@ -2,7 +2,7 @@
     <div>
         <!-- menu Usuarios -->
         <button mat-button [matMenuTriggerFor]="Usuariosmenu" aria-label="Example icon-button with a menu">
-            <mat-icon>account_box</mat-icon>
+            <mat-icon>people</mat-icon>
             Usuarios
         </button>
         <mat-menu #Usuariosmenu="matMenu">
@@ -11,29 +11,29 @@
                 Deportistas
             </button>
             <button [routerLink]="'/lista-entrenador'" mat-menu-item>
-            <mat-icon>supervisor_account</mat-icon>
+            <mat-icon>account_box</mat-icon>
                 Entrenadores
             </button>
             <button [routerLink]="'/lista-administrativo'" mat-menu-item>
-                <mat-icon>supervisor_account</mat-icon>
+                <mat-icon>person_pin</mat-icon>
                 Administrativos
             </button>
         </mat-menu>
 
         <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/lista-torneo'" >
-            <mat-icon>settings_applications</mat-icon>
+            <mat-icon>whatshot</mat-icon>
             Torneos
         </button>
         <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/lista-entrenamiento'">
-            <mat-icon>settings_applications</mat-icon>
+            <mat-icon>fitness_center</mat-icon>
             Entrenamientos
         </button>
         <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/lista-reunion'">
-            <mat-icon>settings_applications</mat-icon>
+            <mat-icon>event</mat-icon>
             Reuniones
         </button>
         <button mat-button aria-label="Example icon-button with a menu" [routerLink]="'/lista-club'">
-            <mat-icon>settings_applications</mat-icon>
+            <mat-icon>location_city</mat-icon>
             Club
         </button>
        

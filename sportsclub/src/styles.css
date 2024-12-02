@@ -38,6 +38,16 @@ h1, h2, h3, h4, h5, h6{
     
 }
 
+.matcard-table{
+    padding: 30px;
+}
+
+th{
+    color: #03DAC5!important;
+    font-weight: bold !important;
+    background-color: #383838 !important;
+}
+
 .ml20{
     margin-left: 20% ;
 }

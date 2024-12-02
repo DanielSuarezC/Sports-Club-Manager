@@ -46,10 +46,8 @@
                         </div>
                         <br>
                     </mat-card>
-
                     <br>
-
-                    <mat-card>
+                    <mat-card class="matcard-table">
                         <div class="mat-elevation-z8">
                             <table mat-table [dataSource]="dataSource" matSort>
 
@@ -81,7 +79,6 @@
                                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     
-
                                 <ng-container matColumnDef="icon">
                                     <th mat-header-cell *matHeaderCellDef>
                                         <a [routerLink]="'/registro-club'" 
@@ -99,13 +96,9 @@
                                         </a>
                                     </td>
                                 </ng-container>
-                            </table>
-    
+                            </table>  
                             <mat-paginator [length]="cantidadRegistros" [pageSizeOptions]="[5, 10, 25, 100]" [pageSize]="10"></mat-paginator>
-                        </div>
-                        <br>
-
-                        
+                        </div>       
                     </mat-card>
                 </div>
             </div>

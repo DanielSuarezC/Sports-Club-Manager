@@ -19,7 +19,8 @@ export class DetallestorneoComponent {
   form1: FormGroup;
 
   displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','categoria','elo','club','estado','icon'];
-  dataSource: MatTableDataSource<Deportista> =  new MatTableDataSource();
+  dataSourceInscritos: MatTableDataSource<Deportista> =  new MatTableDataSource();
+  dataSourceNoInscritos: MatTableDataSource<Deportista> =  new MatTableDataSource();
   cantidadRegistros: number;
   // @BlockUI() blockUI: NgBlockUI;
 
@@ -75,6 +76,10 @@ export class DetallestorneoComponent {
       horainicio : [''],
       horafin:['']
     });
+
+    this.form1.get('idtorneo')?.disable();
+    this.form1.get('nombre')?.disable();
+    this.form1.get('modalidad')?.disable();
 
   }
 
