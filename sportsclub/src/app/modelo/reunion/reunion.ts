@@ -8,3 +8,7 @@ export class Reunion {
     horainicio: Time;
     estado: string;
 }
+
+export interface ReunionResponse{
+    value: Reunion[];
+}

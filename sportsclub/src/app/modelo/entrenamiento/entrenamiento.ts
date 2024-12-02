@@ -6,3 +6,7 @@ export class Entrenamiento {
     ent_cedula: number;
     estado: string;
 }
+
+export interface EntrenamientoResponse{
+    value: Entrenamiento[];
+}

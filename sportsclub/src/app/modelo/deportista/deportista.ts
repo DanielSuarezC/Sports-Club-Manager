@@ -8,3 +8,7 @@ export class Deportista {
     idclub: number;
     estado:string;
 }
+
+export interface DeportistaResponse{
+    value: Deportista[];
+}

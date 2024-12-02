@@ -9,3 +9,7 @@ export class Entrenador {
     idclub: number;
     estado:string;
 }
+
+export interface EntrenadorResponse{
+    value: Entrenador[];
+}

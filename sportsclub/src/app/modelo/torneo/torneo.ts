@@ -5,3 +5,7 @@ export class Torneo {
     fecha: Date;
     estado: string;
 }
+
+export interface TorneoResponse{
+    value: Response[];
+}
