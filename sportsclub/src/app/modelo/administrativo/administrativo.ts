@@ -8,3 +8,7 @@ export class Administrativo {
     idclub: number;
     estado: string;
 }
+
+export interface AdministrativoResponse{
+    value: Administrativo[];
+}
