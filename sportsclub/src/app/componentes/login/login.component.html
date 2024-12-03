@@ -6,7 +6,7 @@
 
                     <mat-card class="example-card">
                         <div class="container text-center">
-                            <img src="../../../assets/ICON-LOGIN.png" width="100" height="100">
+                            <img src="../../../assets/contrasena.png" width="100" height="100">
                         </div>
 
                         <h1 class="text-center">Ingrese</h1>
@@ -14,16 +14,16 @@
                         <form [formGroup]="form1" (ngSubmit)="validar()">
                             <!-- <form> -->
                             <mat-card-content>
-                                <mat-form-field class="full-width" appearance="outline">
+                                <mat-form-field class="full-width" >
                                     <mat-label>Identificación</mat-label>
                                     <input formControlName="identificacion" matInput placeholder="Digite su Identificación">
                                 </mat-form-field>
-                                <mat-form-field class="full-width" appearance="outline">
+                                <mat-form-field class="full-width" >
                                     <mat-label>Clave</mat-label>
                                     <input type="password" formControlName="clave" matInput placeholder="Digite su clave">
                                 </mat-form-field>
                                 <br>
-                                <div class="w-100">
+                                <div>
                                     <button type="submit" mat-raised-button color="primary" class="w-100">Iniciar sesión</button>
                                 </div>
                             </mat-card-content>

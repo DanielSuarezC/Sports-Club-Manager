@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { Deportista } from 'src/app/modelo/deportista/deportista';
+import { DeportistaService } from 'src/app/servicios/usuarios/deportista/deportista.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-deportista',
@@ -24,9 +26,7 @@ export class ListaDeportistaComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private service: DeportistaService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -37,33 +37,30 @@ export class ListaDeportistaComponent implements OnInit{
       categoria: [''],
       estado: ['']
     })
-    // this.consultarUsuarios();
+    this.consultarDeportista();
   }
 
-  consultarUsuarios(): void {
+  consultarDeportista(): void {
     // this.blockUI.start();
-    
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
+      // this.consultarClubesbyFilters();
+    }else{
+      this.service.consultarDeportistas()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value; // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+        }
+      });
+    }
   }
 
   applyFilter(event: Event) {
@@ -78,10 +75,10 @@ export class ListaDeportistaComponent implements OnInit{
   editar(row: Deportista){
     const navigationExtras: NavigationExtras = {
       state: {
-        Deportista: row
+        deportista: row
       }
     };
-    this.route.navigate(['/registro_deportista'], navigationExtras);
+    this.route.navigate(['/registro-deportista'], navigationExtras);
   }
 
 

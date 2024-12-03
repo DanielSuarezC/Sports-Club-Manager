@@ -5,7 +5,7 @@
                 <div class="offset">
 <!-- 
                 <div class="offset-md-4">     -->
-                    <!-- <mat-card> -->
+                    <mat-card>
 
                         <form [formGroup]="form1" (ngSubmit)="guardar()">
                             <div class="contenedor ml5 mr5">
@@ -14,7 +14,7 @@
                                     <br>
                                     <h3 class="text-center">Registro Entrenador</h3>
                                     <div class="container text-center">
-                                        <img src="../../../assets/ICON.png" width="100" height="100">
+                                        <img src="../../../../assets/anadir-amigo.png" width="100" height="100">
                                     </div>
                                 </div>
                             </div>
@@ -59,7 +59,7 @@
                                     <mat-form-field class="full-width" >
                                         <mat-label>Titulo Fide</mat-label>
                                         <input
-                                            formControlName="titulo"
+                                            formControlName="tituloFide"
                                             matInput
                                             placeholder="Digite su categoria">
                                     </mat-form-field>
@@ -72,11 +72,17 @@
                                 </div>
                                 <div class="contenedorInterno">
                                     <mat-form-field class="full-width" >
+                                        <mat-label>Sueldo</mat-label>
+                                        <input formControlName="sueldo" matInput placeholder="Sueldo del entrenador">
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
                                         <mat-label>Club</mat-label>
                                         <mat-select formControlName="idclub">
-                                            <!-- <mat-option *ngFor="let club of clubes" [value]="club.idclub">
+                                            <mat-option *ngFor="let club of clubes" [value]="club.idclub">
                                                 {{ club.nombre }}
-                                              </mat-option> -->
+                                              </mat-option>
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
@@ -90,7 +96,6 @@
                                         </mat-select>
                                     </mat-form-field>
                                 </div>
-                                <br>
                                 <button type="submit" mat-raised-button color="primary" >
                                     <mat-icon>save</mat-icon>
                                     Guardar
@@ -104,7 +109,8 @@
                         </form>
 
                         <br><br><br>
-                    <!-- </mat-card> -->
+                    </mat-card>
+                    <br>
                 </div>
             </div>
         </div>

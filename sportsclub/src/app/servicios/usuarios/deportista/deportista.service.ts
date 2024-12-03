@@ -14,7 +14,7 @@ export class DeportistaService {
   constructor(private httpClient: HttpClient) { }
 
   public guardar(deportista: any): Observable<any> {
-    return this.httpClient.post(this.baseUrl+'addC.php', deportista);
+    return this.httpClient.post(this.baseUrl+'add.php', deportista);
   }
 
   public consultarDeportistas(): Observable<DeportistaResponse> {

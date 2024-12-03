@@ -46,56 +46,38 @@ export class ListaClubComponent implements OnInit {
   consultarClubes(): void {
     // this.blockUI.start();
 
-    if(this.form1.get('idclub')?.value || this.form1.get('nombre')?.value || this.form1.get('ciudad')?.value){
-      console.log('here');
-      this.consultarClubesbyFilters();
+    let idclub = this.form1.get('idclub')?.value;
+    let nombre = this.form1.get('nombre')?.value;
+    let ciudad = this.form1.get('ciudad')?.value;
+
+    if(idclub || nombre || ciudad){
+      this.consultarClubesbyFilters(idclub,nombre,ciudad);
+      this.form1.reset();
     }else{
       this.clubService.consultarClubes()
       .subscribe({
         next: (response) =>{
           this.dataSource.data = response.value // Asigna los datos a dataSource
-          // this.cantidadRegistros = response.value.length;
-          // console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
         },
         error: (err) =>{
           console.log(err);
           // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
           //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
-            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+            Swal.fire('Error','Error al mostrar los clubes. '+ err.message,'error');
         }
       });
     }
   }
 
-  consultarClubesbyFilters():void{
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
-
-    let idclub = 0;
-    let nombre = "";
-    let ciudad = "";
-
-    if(this.form1.get('idclub')?.value){
-      idclub = this.form1.get('idclub')?.value;
-    }else if(this.form1.get('nombre')?.value){
-      nombre = this.form1.get('nombre')?.value;
-    }else if(this.form1.get('ciudad')?.value){
-      ciudad = this.form1.get('ciudad')?.value;
-    }
-
-    let filtros = {
-      idclub: this.form1.get('idclub')?.value,
-      nombre: this.form1.get('nombre')?.value,
-      ciudad: this.form1.get('ciudad')?.value
-    }
-
-    this.clubService.consultarClubesbyFilters(idclub,nombre, ciudad, registroInicial,registrosPorPagina)
+  consultarClubesbyFilters(idclub: number, nombre: string,ciudad: string):void{
+    this.clubService.consultarClubesbyFilters(idclub,nombre, ciudad)
     .subscribe({
       next: (response) =>{
-        console.log(response);
-        this.dataSource.data = response.value // Asigna los datos a dataSource
+        console.log('Response: '+ response.value);
+        this.dataSource.data = response.value;
         // this.cantidadRegistros = response.value.length;
         console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        this.form1.reset();
       },
       error: (err) =>{
         console.log(err);

@@ -77,9 +77,9 @@ export class DetallestorneoComponent {
       horafin:['']
     });
 
-    this.form1.get('idtorneo')?.disable();
-    this.form1.get('nombre')?.disable();
-    this.form1.get('modalidad')?.disable();
+    if(this.datoMaestro.idtorneo){
+      this.form1.get('idtorneo')?.disable();
+    }
 
   }
 
@@ -87,24 +87,36 @@ export class DetallestorneoComponent {
 
   }
 
-  editar(row: Deportista){
-    const navigationExtras: NavigationExtras = {
-      state: {
-        Deportista: row
-      }
-    };
-    this.route.navigate(['/registro_deportista'], navigationExtras);
+  llenarCampos(row?: Torneo) {
+  
+    this.form1.patchValue({
+      idtorneo: row?.idtorneo  || '',
+      nombre: row?.nombre  || '',
+      modalidad: row?.modalidad  || '',
+      estado: row?.estado  || '',
+      fecha: row?.fecha|| ''
+    });
   }
 
-  // ngAfterViewInit(): void {
-  //   setTimeout(() => {
-  //     this.llenarCamposUsuarios(this.datoMaestro);
-  //   });
-  // }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.llenarCampos(this.datoMaestro);
+    });
+  }
 
   hasErrors(controlName: string, errorType: string) {
     return this.form1.get(controlName)?.hasError(errorType) && this.form1.get(controlName)?.touched
 
+  }
+
+  editar(row: Torneo){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        torneo: row
+      }
+    };
+    this.route.navigate(['/registro-torneo'], navigationExtras);
   }
 
 }

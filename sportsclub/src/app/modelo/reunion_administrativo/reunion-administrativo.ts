@@ -6,3 +6,7 @@ export class ReunionAdministrativo {
     horainicio: Time;
     horafin: Time;
 }
+
+export interface ReunionAdministrativoResponse{
+    value: ReunionAdministrativo[];
+}

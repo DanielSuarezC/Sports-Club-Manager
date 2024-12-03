@@ -7,3 +7,7 @@ export class TorneoDeportista {
     horainicio:Time;
     horafin:Time;
 }
+
+export interface TorneoDeportistaResponse{
+    value: TorneoDeportista[];
+}

@@ -17,7 +17,7 @@
                                     <mat-form-field class="full-width" >
                                         <mat-label>Cedula</mat-label>
                                         <input
-                                            formControlName="cedula" matInput
+                                            formControlName="adm_cedula" matInput
                                             placeholder="Filtrar por Cedula">
                                     </mat-form-field>
                                 </div>
@@ -50,7 +50,7 @@
                         </form>
                         <div class="contenedor">
                             <br>
-                            <button (click)="consultarUsuarios()" mat-raised-button color="primary">
+                            <button (click)="consultarAdministrativos()" mat-raised-button color="primary">
                                 <mat-icon>search</mat-icon>
                                 Consultar
                             </button>
@@ -64,14 +64,14 @@
                         <div class="mat-elevation-z8">
                             <table mat-table [dataSource]="dataSource" matSort>
 
-                                <ng-container matColumnDef="nombres" >
+                                <ng-container matColumnDef="nombre" >
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres</th>
-                                    <td mat-cell *matCellDef="let element"> {{element.nombres}}</td>
+                                    <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
                                 </ng-container>
     
-                                <ng-container matColumnDef="cedula" >
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.dep_cedula}} </td>
+                                <ng-container matColumnDef="adm_cedula" >
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.adm_cedula}} </td>
                                 </ng-container>
     
                                 <ng-container matColumnDef="email">
@@ -95,8 +95,8 @@
                                 </ng-container>
 
                                 <ng-container matColumnDef="club">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Club </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.club}} </td>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id Club </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.idclub}} </td>
                                 </ng-container>
     
                                 <ng-container matColumnDef="estado">

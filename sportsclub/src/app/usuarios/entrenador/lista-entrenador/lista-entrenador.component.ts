@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
+import { EntrenadorService } from 'src/app/servicios/usuarios/entrenador/entrenador.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -15,7 +17,7 @@ import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
 })
 export class ListaEntrenadorComponent implements OnInit {
 
-  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','titulo','elo','club','estado','icon'];
+  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','titulo','elo','sueldo','club','estado','icon'];
   dataSource: MatTableDataSource<Entrenador> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -27,7 +29,7 @@ export class ListaEntrenadorComponent implements OnInit {
 
 
   // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private service: EntrenadorService,private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -38,33 +40,30 @@ export class ListaEntrenadorComponent implements OnInit {
       titulo: [''],
       estado: ['']
     })
-    this.consultarUsuarios();
+    this.consultarEntrenadores();
   }
 
-  consultarUsuarios(): void {
+  consultarEntrenadores(): void {
     // this.blockUI.start();
-    
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
+      // this.consultarClubesbyFilters();
+    }else{
+      this.service.consultarEntrenadores()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value; // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+        }
+      });
+    }
   }
 
   applyFilter(event: Event) {

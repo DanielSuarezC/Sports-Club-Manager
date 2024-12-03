@@ -43,6 +43,13 @@
     <button mat-button matTooltip="Cerrar Sesión" (click)="cerrarSesion()">
         <mat-icon>logout</mat-icon>
     </button>
-    <span><img height="60" src="../../../assets/logo SPORTS CLUB letra blanca.png" ></span>
+    <span>
+        <img 
+        height="60" 
+        src="../../../assets/logo SPORTS CLUB letra blanca.png" 
+        [routerLink]="'/inicio'" 
+        matTooltip="Inicio" 
+        style="cursor: pointer;">
+    </span>
 </mat-toolbar>
 <br>

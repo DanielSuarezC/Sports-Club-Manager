@@ -4,7 +4,7 @@ export class Deportista {
     email: string;
     telefono:string;
     categoria:string;
-    Elo: number;
+    elo: number;
     idclub: number;
     estado:string;
 }

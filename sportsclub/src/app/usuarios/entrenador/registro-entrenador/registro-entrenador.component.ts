@@ -3,7 +3,12 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component';
+import { Club } from 'src/app/modelo/club/club';
 import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
+import { ClubService } from 'src/app/servicios/club/club.service';
+import { EntrenadorService } from 'src/app/servicios/usuarios/entrenador/entrenador.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-entrenador',
@@ -13,49 +18,65 @@ import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
 export class RegistroEntrenadorComponent implements OnInit{
   datoMaestro: Entrenador = new Entrenador();
   form1: FormGroup;
+  clubes: Club[] = [];
   // @BlockUI() blockUI: NgBlockUI;
 
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private service: EntrenadorService,private clubService: ClubService,private fb: FormBuilder, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
     const navigation = this.route.getCurrentNavigation();
     if (navigation?.extras.state) {
       this.datoMaestro = navigation.extras.state['entrenador'];
     }
   }
-  // constructor(private fb: FormBuilder, private usuarioService: UsuariosService, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
-  //   const navigation = this.route.getCurrentNavigation();
-  //   if (navigation?.extras.state) {
-  //     this.datoMaestro = navigation.extras.state['usuario'];
-  //   }
-  // }
 
   guardar(): void {
     // this.blockUI.start();
-    // this.datoMaestro.idclub = this.form1.get('idclub')?.value;
-    // this.datoMaestro.nombre = this.form1.get('nombre')?.value;
-    // this.datoMaestro.ciudad = this.form1.get('ciudad')?.value;
-    // this.datoMaestro.direccion = this.form1.get('direccion')?.value;
-    // this.datoMaestro.telefono = this.form1.get('telefono')?.value;
-    // this.datoMaestro.direccion = this.form1.get('direccion')?.value;
+    this.datoMaestro.ent_cedula = this.form1.get('ent_cedula')?.value;
+    this.datoMaestro.nombre = this.form1.get('nombre')?.value;
+    this.datoMaestro.email = this.form1.get('email')?.value;
+    this.datoMaestro.telefono = this.form1.get('telefono')?.value;
+    this.datoMaestro.elo = this.form1.get('elo')?.value;
+    this.datoMaestro.tituloFide = this.form1.get('tituloFide')?.value;
+    this.datoMaestro.sueldo = this.form1.get('sueldo')?.value;
+    this.datoMaestro.idclub = this.form1.get('idclub')?.value;
+    this.datoMaestro.estado = this.form1.get('estado')?.value;
 
-    // this.clubService.guardarClub(this.datoMaestro).pipe().subscribe({
-    //   next: (response) => {
-    //     console.log('Respuesta del servidor:', response);
-    //     Swal.fire('Club guardado', 'Información guardada correctamente', 'success')
-    //     // alert('Club registrado con éxito');
-    //     this.form1.reset(); // Reiniciar el formulario
-    //   },
-    //   error: (err) => {
-    //     console.error('Error al registrar el club:', err);
-    //     this.dialog.open(MensajeComponent, {
-    //       data: {
-    //         titulo: 'Error',
-    //         mensaje: 'Error al registrar club. ' + err, textoBoton: 'Aceptar'
-    //       }
-    //     });
-    //   }
-    // }
-    // );
+
+    this.service.guardar(this.datoMaestro).pipe().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
+        Swal.fire('Entrenador guardado', 'Información guardada correctamente', 'success')
+        this.form1.reset(); // Reiniciar el formulario
+      },
+      error: (err) => {
+        console.error('Error al registrar el entrenador:', err);
+        this.dialog.open(MensajeComponent, {
+          data: {
+            titulo: 'Error',
+            mensaje: 'Error al registrar entrenador. ' + Response.error, textoBoton: 'Aceptar'
+          }
+        });
+      }
+    }
+    );
   }
+
+  consultarClubes(){
+    this.clubService.consultarClubes()
+    .subscribe({
+      next: (response) =>{
+        this.clubes = response.value // Asigna los datos a dataSource
+        // this.cantidadRegistros = response.value.length;
+        // console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los clubes. '+ err.message,'error');
+      }
+    });
+  
+}
 
   ngOnInit(): void {
     this.form1 = this.fb.group({
@@ -63,45 +84,20 @@ export class RegistroEntrenadorComponent implements OnInit{
       nombre: [''],
       email: [''],
       telefono:[''],
-      titulo:[''],
+      tituloFide:[''],
       elo: [''],
+      sueldo: [''],
       idclub: [''],
       estado:['']
     });
 
     this.consultarClubes();
 
-    // if (this.datoMaestro.id) {
-    //   this.form1.get('clave')?.disable();
-    // }
-  }
-
-  consultarClubes(): void {
-    // this.blockUI.start();
-    
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
-  
-    // this.club.consultarUsuarios("", "", "", "", "", registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.usuarios = value.datos;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    if (this.datoMaestro.ent_cedula) {
+      this.form1.get('ent_cedula')?.disable();
+    }
   }
   
-
   ngAfterViewInit(): void {
     setTimeout(() => {
       this.llenarCampos(this.datoMaestro);
@@ -120,8 +116,9 @@ export class RegistroEntrenadorComponent implements OnInit{
       nombre: row?.nombre  || '',
       email: row?.email  || '',
       telefono:row?.telefono  || '',
-      titulo:row?.tituloFide  || '',
-      Elo: row?.Elo  || '',
+      tituloFide:row?.tituloFide  || '',
+      elo: row?.elo  || '',
+      sueldo: row?.sueldo || '',
       idclub: row?.idclub  || '',
       estado:row?.estado  || ''
     });

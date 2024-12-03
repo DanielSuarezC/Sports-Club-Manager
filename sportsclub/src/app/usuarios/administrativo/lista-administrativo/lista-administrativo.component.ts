@@ -6,6 +6,9 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { Administrativo } from 'src/app/modelo/administrativo/administrativo';
+import { ClubService } from 'src/app/servicios/club/club.service';
+import { AdministrativoService } from 'src/app/servicios/usuarios/administrativo/administrativo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-lista-administrativo',
@@ -13,7 +16,7 @@ import { Administrativo } from 'src/app/modelo/administrativo/administrativo';
   styleUrls: ['./lista-administrativo.component.css']
 })
 export class ListaAdministrativoComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','cargo','sueldo','club','estado','icon'];
+  displayedColumns: string[] = ['nombre','adm_cedula', 'email','telefono','cargo','sueldo','club','estado','icon'];
   dataSource: MatTableDataSource<Administrativo> =  new MatTableDataSource();
   cantidadRegistros: number;
   
@@ -23,47 +26,61 @@ export class ListaAdministrativoComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private service: AdministrativoService, private clubService: ClubService,private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
-      cedula: [''],
+      adm_cedula: [''],
       nombre: [''],
       cargo: [''],
       estado: ['']
     })
-    this.consultarUsuarios();
+    this.consultarAdministrativos();
   }
 
-  consultarUsuarios(): void {
+  consultarAdministrativos(): void {
     // this.blockUI.start();
-    
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
+      // this.consultarClubesbyFilters();
+    }else{
+      this.service.consultarAdministrativos()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value; // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+        }
+      });
+
+      this.consultarClubes();
+    }
   }
+
+  consultarClubes(): any {
+    // this.blockUI.start();
+      this.clubService.consultarClubes()
+      .subscribe({
+        next: (response) =>{
+          return response.value;
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+        }
+      });
+    }
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -80,7 +97,7 @@ export class ListaAdministrativoComponent implements OnInit{
         administrativo: row
       }
     };
-    this.route.navigate(['/registro_administrativo'], navigationExtras);
+    this.route.navigate(['/registro-administrativo'], navigationExtras);
   }
 
 }

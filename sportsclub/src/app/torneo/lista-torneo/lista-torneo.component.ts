@@ -6,6 +6,8 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { Torneo } from 'src/app/modelo/torneo/torneo';
+import { TorneoService } from 'src/app/servicios/torneo/torneo.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -24,9 +26,7 @@ export class ListaTorneoComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private service: TorneoService,private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
@@ -38,33 +38,31 @@ export class ListaTorneoComponent implements OnInit{
       modalidad: [''],
       estado: ['']
     })
-    this.consultarUsuarios();
+    this.consultarTorneos();
   }
 
-  consultarUsuarios(): void {
+  consultarTorneos(): void {
     // this.blockUI.start();
-    
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
+      // this.consultarClubesbyFilters();
+    }else{
+      this.service.consultarTorneos()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value; // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los torneos. '+ err,'error');
+        }
+      });
+
+    }
   }
 
   applyFilter(event: Event) {
@@ -83,6 +81,15 @@ export class ListaTorneoComponent implements OnInit{
       }
     };
     this.route.navigate(['/registro-torneo'], navigationExtras);
+  }
+
+  detalles(row: Torneo){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        torneo: row
+      }
+    };
+    this.route.navigate(['/detalles-torneo'], navigationExtras);
   }
 
 

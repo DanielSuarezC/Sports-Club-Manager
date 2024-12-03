@@ -1,4 +1,3 @@
-<p>lista-deportista works!</p>
 <!-- <block-ui message="Por favor espere..."> -->
     <div class="bootstrap-wrapper">
         <div class="container">
@@ -51,7 +50,7 @@
                         </form>
                         <div class="contenedor">
                             <br>
-                            <button (click)="consultarUsuarios()" mat-raised-button color="primary">
+                            <button (click)="consultarDeportista()" mat-raised-button color="primary">
                                 <mat-icon>search</mat-icon>
                                 Consultar
                             </button>
@@ -67,7 +66,7 @@
 
                                 <ng-container matColumnDef="nombres" >
                                     <th mat-header-cell *matHeaderCellDef mat-sort-header> Nombres</th>
-                                    <td mat-cell *matCellDef="let element"> {{element.nombres}}</td>
+                                    <td mat-cell *matCellDef="let element"> {{element.nombre}}</td>
                                 </ng-container>
     
                                 <ng-container matColumnDef="cedula" >
@@ -96,8 +95,8 @@
                                 </ng-container>
 
                                 <ng-container matColumnDef="club">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Club </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.club}} </td>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Id Club </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.idclub}} </td>
                                 </ng-container>
     
                                 <ng-container matColumnDef="estado">

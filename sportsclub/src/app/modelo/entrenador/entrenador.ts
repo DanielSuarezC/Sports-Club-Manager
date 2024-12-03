@@ -3,7 +3,7 @@ export class Entrenador {
     nombre: string;
     email: string;
     telefono:string;
-    Elo: number;
+    elo: number;
     tituloFide:string;
     sueldo: number;
     idclub: number;

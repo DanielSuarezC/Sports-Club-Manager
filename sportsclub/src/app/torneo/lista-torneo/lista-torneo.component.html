@@ -59,7 +59,7 @@
                         </form>
                         <div class="contenedor">
                             <br>
-                            <button (click)="consultarUsuarios()" mat-raised-button color="primary">
+                            <button (click)="consultarTorneos()" mat-raised-button color="primary">
                                 <mat-icon>search</mat-icon>
                                 Consultar
                             </button>
@@ -106,7 +106,7 @@
                                         Detalles
                                     </th>
                                     <td mat-cell *matCellDef="let row">
-                                        <a (click)="editar(row)" mat-icon-button class="example-icon"
+                                        <a (click)="detalles(row)" mat-icon-button class="example-icon"
                                             aria-label="Example mat-icon-button with menu icon"
                                             matTooltip="Detalles">
                                             <mat-icon>more</mat-icon>
