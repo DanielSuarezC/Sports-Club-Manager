@@ -9,5 +9,5 @@ export class TorneoDeportista {
 }
 
 export interface TorneoDeportistaResponse{
-    value: TorneoDeportista[];
+    value: any[];
 }

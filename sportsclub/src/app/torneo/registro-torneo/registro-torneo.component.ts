@@ -3,7 +3,10 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component';
 import { Torneo } from 'src/app/modelo/torneo/torneo';
+import { TorneoService } from 'src/app/servicios/torneo/torneo.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-registro-torneo',
@@ -15,13 +18,7 @@ export class RegistroTorneoComponent implements OnInit{
   form1: FormGroup;
   // @BlockUI() blockUI: NgBlockUI;
 
-  // constructor(private fb: FormBuilder, private clubService: ClubService, private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
-  //   const navigation = this.route.getCurrentNavigation();
-  //   if (navigation?.extras.state) {
-  //     this.datoMaestro = navigation.extras.state['usuario'];
-  //   }
-  // }
-    constructor(private fb: FormBuilder,private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
+    constructor(private service: TorneoService,private fb: FormBuilder,private dialog: MatDialog, private route: Router, private changeDetectorRef: ChangeDetectorRef) {
     const navigation = this.route.getCurrentNavigation();
     if (navigation?.extras.state) {
       this.datoMaestro = navigation.extras.state['torneo'];
@@ -30,38 +27,37 @@ export class RegistroTorneoComponent implements OnInit{
 
   guardar(): void {
     // this.blockUI.start();
-    // this.datoMaestro.idclub = this.form1.get('idclub')?.value;
-    // this.datoMaestro.nombre = this.form1.get('nombre')?.value;
-    // this.datoMaestro.ciudad = this.form1.get('ciudad')?.value;
-    // this.datoMaestro.direccion = this.form1.get('direccion')?.value;
-    // this.datoMaestro.telefono = this.form1.get('telefono')?.value;
-    // this.datoMaestro.direccion = this.form1.get('direccion')?.value;
+    this.datoMaestro.idtorneo = 0;
+    this.datoMaestro.nombre = this.form1.get('nombre')?.value;
+    this.datoMaestro.modalidad = this.form1.get('modalidad')?.value;
+    this.datoMaestro.estado = this.form1.get('estado')?.value;
+    this.datoMaestro.fecha = this.form1.get('fecha')?.value;
 
-    // this.clubService.guardarClub(this.datoMaestro).pipe().subscribe({
-    //   next: (response) => {
-    //     console.log('Respuesta del servidor:', response);
-    //     Swal.fire('Club guardado', 'Información guardada correctamente', 'success')
-    //     // alert('Club registrado con éxito');
-    //     this.form1.reset(); // Reiniciar el formulario
-    //   },
-    //   error: (err) => {
-    //     console.error('Error al registrar el club:', err);
-    //     this.dialog.open(MensajeComponent, {
-    //       data: {
-    //         titulo: 'Error',
-    //         mensaje: 'Error al registrar club. ' + err, textoBoton: 'Aceptar'
-    //       }
-    //     });
-    //   }
-    // }
-    // );
+
+    this.service.guardar(this.datoMaestro).pipe().subscribe({
+      next: (response) => {
+        console.log('Respuesta del servidor:', response);
+        Swal.fire('Club guardado', 'Información guardada correctamente', 'success')
+        this.form1.reset(); // Reiniciar el formulario
+      },
+      error: (err) => {
+        console.error('Error al registrar el club:', err);
+        this.dialog.open(MensajeComponent, {
+          data: {
+            titulo: 'Error',
+            mensaje: 'Error al registrar club. ' + err, textoBoton: 'Aceptar'
+          }
+        });
+      }
+    }
+    );
   }
 
   ngOnInit(): void {
     this.form1 = this.fb.group({
-      idtorneo: ['', Validators.required],
       nombre: ['', Validators.required],
       modalidad: ['', Validators.required],
+      estado : [''],
       fecha: ['', Validators.required]
     });
 

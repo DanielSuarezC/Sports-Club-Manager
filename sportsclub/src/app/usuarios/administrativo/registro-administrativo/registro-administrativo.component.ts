@@ -91,6 +91,10 @@ export class RegistroAdministrativoComponent implements OnInit{
     });
 
     this.consultarClubes();
+
+    if(this.datoMaestro.adm_cedula){
+      this.form1.get('adm_cedula')?.disable();
+    }
   }
 
   
@@ -119,7 +123,7 @@ export class RegistroAdministrativoComponent implements OnInit{
       estado:row?.estado  || ''
     });
 
-    this.form1.get('adm_cedula')?.disable();
+    
   }
 
 }

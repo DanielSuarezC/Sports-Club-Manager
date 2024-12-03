@@ -30,6 +30,8 @@ import {MatDialogModule} from '@angular/material/dialog';
 import {MatListModule} from '@angular/material/list';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+
+
 import { LoginComponent } from './componentes/login/login.component';
 import { InicioComponent } from './componentes/inicio/inicio.component';
 import { AutorizacionInterceptor } from './servicios/autorizacion/autorizacion.interceptor';
@@ -49,6 +51,7 @@ import { RegistroEntrenamientoComponent } from './entrenamiento/registro-entrena
 import { RegistroReunionComponent } from './reunion/registro-reunion/registro-reunion.component';
 import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 import { DetallestorneoComponent } from './torneo/detallestorneo/detallestorneo.component';
+import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
 
 @NgModule({
   declarations: [
@@ -99,7 +102,8 @@ import { DetallestorneoComponent } from './torneo/detallestorneo/detallestorneo.
     MatSlideToggleModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    NgxMaterialTimepickerModule
   ],
   providers: [{provide: HTTP_INTERCEPTORS, useClass: AutorizacionInterceptor, multi: true}],
   bootstrap: [AppComponent]
