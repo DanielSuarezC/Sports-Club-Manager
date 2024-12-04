@@ -10,5 +10,6 @@
     width: 100%;   /* Ajusta el ancho al 100% */
 }
 i{
-    color: gray;
+    color: #CE93D8;
+    font-weight: bold;
 }

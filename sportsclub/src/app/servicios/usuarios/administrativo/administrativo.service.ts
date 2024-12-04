@@ -20,4 +20,20 @@ export class AdministrativoService {
   public consultarAdministrativos(): Observable<AdministrativoResponse> {
     return this.httpClient.get<AdministrativoResponse>(this.baseUrl + 'getAll.php');
   }
+
+  public consultarAdministrativosbyFilters(adm_cedula: number, nombre: string, cargo: string, estado: string): Observable<AdministrativoResponse> {
+    // Crear un objeto con los datos a enviar
+    const payload = {
+        adm_cedula: adm_cedula || 0,
+        nombre: nombre || "",
+        cargo: cargo || "",
+        estado: estado || ""
+    };
+
+    // Realizar una solicitud POST con el JSON al backend
+    return this.httpClient.post<AdministrativoResponse>(
+        this.baseUrl + 'getbyFilters.php', // URL de la API
+        JSON.stringify(payload)           // Convertir el objeto a JSON                   
+    );
+ }
 }

@@ -32,7 +32,7 @@ export class ListaDeportistaComponent implements OnInit{
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
-      cedula: [''],
+      dep_cedula: [''],
       nombre: [''],
       categoria: [''],
       estado: ['']
@@ -43,8 +43,8 @@ export class ListaDeportistaComponent implements OnInit{
   consultarDeportista(): void {
     // this.blockUI.start();
 
-    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
-      // this.consultarClubesbyFilters();
+    if(this.form1.get('dep_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('categoria')?.value || this.form1.get('estado')?.value){
+      this.consultarDeportistasbyFilters();
     }else{
       this.service.consultarDeportistas()
       .subscribe({
@@ -62,6 +62,31 @@ export class ListaDeportistaComponent implements OnInit{
       });
     }
   }
+
+  consultarDeportistasbyFilters():void{
+    let dep_cedula = this.form1.get('dep_cedula')?.value;
+    let nombre = this.form1.get('nombre')?.value;
+    let categoria = this.form1.get('categoria')?.value;
+    let estado = this.form1.get('estado')?.value;
+
+    this.service.consultarDeportistasbyFilters(dep_cedula, nombre, categoria, estado)
+    .subscribe({
+      next: (response) =>{
+        console.log('Response: '+ response.value);
+        this.dataSource.data = response.value;
+        // this.cantidadRegistros = response.value.length;
+        console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        this.form1.reset();
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+      }
+    });
+  }
+
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;

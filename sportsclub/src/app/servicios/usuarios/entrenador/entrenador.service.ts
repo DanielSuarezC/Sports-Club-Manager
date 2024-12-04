@@ -20,4 +20,20 @@ export class EntrenadorService {
   public consultarEntrenadores(): Observable<EntrenadorResponse> {
     return this.httpClient.get<EntrenadorResponse>(this.baseUrl + 'getAll.php');
   }
+
+  public consultarEntrenadoressbyFilters(ent_cedula: number, nombre: string, tituloFide: string, estado: string): Observable<EntrenadorResponse> {
+    // Crear un objeto con los datos a enviar
+    const payload = {
+        ent_cedula: ent_cedula || 0,
+        nombre: nombre || "",
+        tituloFide: tituloFide || "",
+        estado: estado || ""
+    };
+
+    // Realizar una solicitud POST con el JSON al backend
+    return this.httpClient.post<EntrenadorResponse>(
+        this.baseUrl + 'getbyFilters.php', // URL de la API
+        JSON.stringify(payload)           // Convertir el objeto a JSON                   
+    );
+ }
 }

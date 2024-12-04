@@ -17,7 +17,7 @@
                                     <mat-form-field class="full-width" >
                                         <mat-label>Cedula</mat-label>
                                         <input
-                                            formControlName="cedula" matInput
+                                            formControlName="ent_cedula" matInput
                                             placeholder="Filtrar por Cedula">
                                     </mat-form-field>
                                 </div>
@@ -32,7 +32,7 @@
                                     <br>
                                     <mat-form-field class="full-width" >
                                         <mat-label>Titulo Fide</mat-label>
-                                        <input formControlName="titulo" matInput placeholder="Filtrar por titulo Fide">
+                                        <input formControlName="tituloFide" matInput placeholder="Filtrar por titulo Fide">
                                     </mat-form-field>
                                 </div>
 
@@ -50,7 +50,7 @@
                         </form>
                         <div class="contenedor">
                             <br>
-                            <button (click)="consultarEntrenadores()" mat-raised-button color="primary">
+                            <button (click)="consultarEntrenadoresbyFilters()" mat-raised-button color="primary">
                                 <mat-icon>search</mat-icon>
                                 Consultar
                             </button>
