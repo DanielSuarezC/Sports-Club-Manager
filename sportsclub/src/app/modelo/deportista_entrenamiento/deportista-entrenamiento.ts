@@ -9,5 +9,5 @@ export class DeportistaEntrenamiento {
 }
 
 export interface DeportistaEntrenamientoResponse{
-    value: DeportistaEntrenamiento[];
+    value: any[];
 }

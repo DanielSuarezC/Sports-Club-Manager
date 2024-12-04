@@ -5,7 +5,11 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
+import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
 import { Entrenamiento } from 'src/app/modelo/entrenamiento/entrenamiento';
+import { EntrenamientoService } from 'src/app/servicios/entrenamiento/entrenamiento.service';
+import { EntrenadorService } from 'src/app/servicios/usuarios/entrenador/entrenador.service';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -14,8 +18,10 @@ import { Entrenamiento } from 'src/app/modelo/entrenamiento/entrenamiento';
   styleUrls: ['./lista-entrenamiento.component.css']
 })
 export class ListaEntrenamientoComponent implements OnInit{
-  displayedColumns: string[] = ['nombres', 'identificacion', 'rol','estado','icon'];
+  displayedColumns: string[] = ['identrenamiento','tipo', 'jornada', 'ent_cedula','estado','detalles', 'icon'];
   dataSource: MatTableDataSource<Entrenamiento> =  new MatTableDataSource();
+  entrenadores: Entrenador[] = [];
+
   cantidadRegistros: number;
   
   form1: FormGroup;
@@ -24,48 +30,85 @@ export class ListaEntrenamientoComponent implements OnInit{
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-
-  // constructor(private usuarioService: UsuariosService, private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
-  constructor(private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
+  constructor(private service: EntrenamientoService,private entrenadorService: EntrenadorService,private fb: FormBuilder, private dialog: MatDialog, private route: Router) { }
 
   ngOnInit(): void {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
     this.form1 = this.fb.group({
-      nombre: [''],
-      apellidos: [''],
-      identificacion: [''],
+      identrenamiento: [''],
+      tipo: [''],
+      jornada: [''],
       estado: [''],
-      rol: ['']
+      ent_cedula: ['']
     })
-    this.consultarUsuarios();
+    this.consultarEntrenamientos();
+    this.consultarEntrenadores();
   }
 
-  consultarUsuarios(): void {
-    // this.blockUI.start();
+  consultarEntrenamientos(): void {
+
+      this.service.consultarEntrenamientos()
+      .subscribe({
+        next: (response) =>{
+          this.dataSource.data = response.value; // Asigna los datos a dataSource
+          // this.cantidadRegistros = response.value.length;
+          console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        },
+        error: (err) =>{
+          console.log(err);
+          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+            Swal.fire('Error','Error al mostrar los torneos. '+ err,'error');
+        }
+      });
+
+    }
+
     
-    const registroInicial = 0;
-    const registrosPorPagina = 10;
+  consultarEntrenamientosbyFilters():void{
+    let identrenamiento = this.form1.get('identrenamiento')?.value;
+    let tipo = this.form1.get('tipo')?.value;
+    let jornada = this.form1.get('jornada')?.value;
+    let estado = this.form1.get('estado')?.value;
+    let ent_cedula = this.form1.get('ent_cedula')?.value;
 
-    // this.usuarioService.consultarUsuarios(this.form1.get('nombre')?.value, this.form1.get('apellidos')?.value, this.form1.get('identificacion')?.value, this.form1.get('estado')?.value, this.form1.get('rol')?.value, registroInicial, registrosPorPagina)
-    //   .subscribe((value: RespuestaGenerica) => {
-    //     console.log(value);
-    //     if (value.isError === 'N') {
-    //       this.dataSource.data = value.datos as Usuario[];
-    //       this.cantidadRegistros = value.cantidadRegistros;
-    //       this.blockUI.stop();
-    //     } else {
-    //       //this.blockUI.stop();
-    //       this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-    //       mensaje: 'Error al mostrar usuarios. ' + value.message, textoBoton: 'Aceptar' }});
-    //       // Swal.fire('Error','Error al mostrar los usuarios. '+ value.message,'error');
-    //     }
-    //     this.blockUI.stop();
-    //   }, error => {
-    //     this.blockUI.stop();
-    //     this.dialog.open(MensajeComponent, {data: {titulo: 'Error', mensaje: error.error.message, textoBoton: 'Aceptar' }})
-    //   });
+    this.service.consultarEntrenamientosbyFilters(identrenamiento, tipo, jornada, estado, ent_cedula)
+    .subscribe({
+      next: (response) =>{
+        console.log('Response: '+ response.value);
+        this.dataSource.data = response.value;
+        // this.cantidadRegistros = response.value.length;
+        console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        this.form1.reset();
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+      }
+    });
   }
+
+  consultarEntrenadores(){
+    this.entrenadorService.consultarEntrenadores()
+    .subscribe({
+      next: (response) =>{
+        this.entrenadores = response.value // Asigna los datos a dataSource
+        // this.cantidadRegistros = response.value.length;
+        // console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los clubes. '+ err.message,'error');
+      }
+    });
+  
+}
+  
 
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
@@ -83,6 +126,15 @@ export class ListaEntrenamientoComponent implements OnInit{
       }
     };
     this.route.navigate(['/'], navigationExtras);
+  }
+
+  detalles(row: Entrenamiento){
+    const navigationExtras: NavigationExtras = {
+      state: {
+        entrenamiento: row
+      }
+    };
+    this.route.navigate(['/detalles-entrenamiento'], navigationExtras);
   }
 
 

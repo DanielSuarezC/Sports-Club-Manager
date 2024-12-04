@@ -34,6 +34,6 @@ export class ClubService {
         this.baseUrl + 'getbyFilters.php', // URL de la API
         JSON.stringify(payload)           // Convertir el objeto a JSON                   
     );
-}
+  }
   
 }

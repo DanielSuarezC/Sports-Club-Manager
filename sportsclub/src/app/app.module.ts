@@ -52,6 +52,7 @@ import { RegistroReunionComponent } from './reunion/registro-reunion/registro-re
 import { MensajeComponent } from './componentes/mensaje/mensaje.component';
 import { DetallestorneoComponent } from './torneo/detallestorneo/detallestorneo.component';
 import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
+import { DetallesEntrenamientoComponent } from './entrenamiento/detalles-entrenamiento/detalles-entrenamiento.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { NgxMaterialTimepickerModule } from 'ngx-material-timepicker';
     RegistroEntrenamientoComponent,
     RegistroReunionComponent,
     MensajeComponent,
-    DetallestorneoComponent
+    DetallestorneoComponent,
+    DetallesEntrenamientoComponent
   ],
   imports: [
     BrowserModule,

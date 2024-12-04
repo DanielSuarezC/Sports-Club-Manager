@@ -14,5 +14,16 @@
   display: flex;
   justify-content: center; 
   /* align-items: center;  */
-  margin-top: 100px;
+
+  background-image: url('../../../assets/backgroundlogin.jpg'); /* Ruta de la imagen */
+  background-size: cover;  /* Ajusta la imagen para que cubra todo el contenedor */
+  background-position: center; /* Centra la imagen */
+  height: 100vh; /* Ajusta la altura al 100% de la ventana */
+  width: 100%;   /* Ajusta el ancho al 100% */
+  /* margin-top: 0%;
+  padding: 0; */
 }
+
+
+
+

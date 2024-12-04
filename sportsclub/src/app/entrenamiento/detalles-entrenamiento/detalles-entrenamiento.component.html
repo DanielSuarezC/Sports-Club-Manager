@@ -10,10 +10,7 @@
                                 <br>
                                 <div class="text-center">
                                     <br>
-                                    <h3 class="text-center">Detalles de torneos</h3>
-                                    <!-- <div class="container text-center">
-                                        <img src="../../../assets/ICON.png" width="100" height="100">
-                                    </div> -->
+                                    <h3 class="text-center">Detalles de Entrenamiento</h3>
                                 </div>
                             </div>
                             <br>
@@ -21,27 +18,37 @@
 
                                 <div class="contenedorInterno">
                                     <mat-form-field class="full-width" >
-                                        <mat-label>Id torneo</mat-label>
-                                        <input
-                                            formControlName="idtorneo" matInput
-                                            placeholder="Digite el Id">
-                                        <mat-error *ngIf="hasErrors('identificacion','minlength')">Mínimo diez carácteres</mat-error>    
-                                    </mat-form-field>
-                                </div>
-                                <div class="contenedorInterno">
-                                    <mat-form-field class="full-width" >
-                                        <mat-label>Nombre del torneo</mat-label>
-                                        <input formControlName="nombre" matInput placeholder="Digite el nombre">
+                                        <mat-label>Id entrenamiento</mat-label>
+                                        <input formControlName="identrenamiento" matInput placeholder="id entrenador">
                                     </mat-form-field>
                                 </div>
 
                                 <div class="contenedorInterno">
                                     <mat-form-field class="full-width" >
-                                        <mat-label>Modalidad</mat-label>
-                                        <input formControlName="modalidad" matInput placeholder="Digite la modalidad">
+                                        <mat-label>Tipo</mat-label>
+                                        <input formControlName="tipo" matInput placeholder="Tipo">
                                     </mat-form-field>
                                 </div>
-
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Jornada</mat-label>
+                                        <mat-select formControlName="jornada">
+                                            <mat-option>...</mat-option>
+                                            <mat-option value="Mañana">Mañana</mat-option>
+                                            <mat-option value="Tarde">Tarde</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Entrenador encargado</mat-label>
+                                        <mat-select formControlName="ent_cedula">
+                                            <mat-option *ngFor="let entrenador of entrenadores" [value]="entrenador.ent_cedula" >
+                                            {{entrenador.nombre}}
+                                            </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
                                 <div class="contenedorInterno">
                                     <mat-form-field class="full-width" >
                                         <mat-label>Estado</mat-label>
@@ -64,40 +71,28 @@
                                     </mat-form-field>
                                 </div>
 
-                                <mat-form-field>
-                                    <mat-label> Hora inicio</mat-label>
-                                    <input formControlName="horainicio" matInput [ngxTimepicker]="picker">
-                                    <ngx-material-timepicker #picker [theme]="darkTheme"></ngx-material-timepicker>
-                                  </mat-form-field>
-
-                                  <mat-form-field>
-                                    <mat-label>Hora de finalizacion</mat-label>
-                                    <input formControlName="horafin" matInput [ngxTimepicker]="picker2">
-                                    <ngx-material-timepicker #picker2 [theme]="darkTheme"></ngx-material-timepicker>
-                                  </mat-form-field>
-
-
-                                
-                                <!-- <div class="contenedorInterno">
-                                    <mat-form-field class="full-width" >
-                                        <mat-label>Hora de inicio</mat-label>
-                                        <input formControlName="horainicio" matInput placeholder="Digite la hora de inicio">
+                                <div class="contenedorInterno">
+                                    <mat-form-field>
+                                        <mat-label> Hora inicio</mat-label>
+                                        <input formControlName="horainicio" matInput [ngxTimepicker]="picker">
+                                        <ngx-material-timepicker #picker [theme]="darkTheme"></ngx-material-timepicker>
+                                      </mat-form-field>
+                                </div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field>
+                                      <mat-label>Hora de finalizacion</mat-label>
+                                      <input formControlName="horafin" matInput [ngxTimepicker]="picker2">
+                                      <ngx-material-timepicker #picker2 [theme]="darkTheme"></ngx-material-timepicker>
                                     </mat-form-field>
-                                </div> -->
-                                
-                                <!-- <div class="contenedorInterno">
-                                    <mat-form-field class="full-width" >
-                                        <mat-label>Hora de finalización</mat-label>
-                                        <input formControlName="horafin" type="time" matInput placeholder="Digite la hora de finalización">
-                                    </mat-form-field>
-                                </div> -->
+                                </div>
+                                                
                                 <div class="contenedorInterno"></div>
                                 <br><br>
                                 <button type="submit" mat-raised-button color="primary" >
                                     <mat-icon>save</mat-icon>
                                     Actualizar
                                 </button>
-                                <button [routerLink]="'/lista-torneo'" type="reset" style="margin-left: 20px;" mat-raised-button color="accent">
+                                <button [routerLink]="'/lista-entrenamiento'" type="reset" style="margin-left: 20px;" mat-raised-button color="accent">
                                     <mat-icon>undo</mat-icon>
                                     Volver
                                 </button>
@@ -144,9 +139,14 @@
                                     <td mat-cell *matCellDef="let element"> {{element.elo}} </td>
                                 </ng-container>
 
-                                <ng-container matColumnDef="torneo">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Torneo </th>
-                                    <td mat-cell *matCellDef="let element"> {{element.nombre_torneo}} </td>
+                                <ng-container matColumnDef="identrenamiento">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> id Entrenamiento </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.identrenamiento}} </td>
+                                </ng-container>
+
+                                <ng-container matColumnDef="fecha">
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha </th>
+                                    <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
                                 </ng-container>
 
                                 <ng-container matColumnDef="horainicio">
@@ -173,7 +173,7 @@
                                         Eliminar deportista
                                     </th>
                                     <td mat-cell *matCellDef="let row">
-                                        <a (click)="editar(row)" mat-icon-button class="example-icon"
+                                        <a mat-icon-button class="example-icon"
                                             aria-label="Example mat-icon-button with menu icon"
                                             matTooltip="Eliminar deportista">
                                             <mat-icon>delete</mat-icon>
@@ -238,7 +238,7 @@
 
                                 <ng-container matColumnDef="icon">
                                     <th mat-header-cell *matHeaderCellDef>
-                                        Agregar deportista al torneo
+                                        Agregar deportista al entrenamiento
                                     </th>
                                     <td mat-cell *matCellDef="let row">
                                         <a (click)="AgregarDeportista(row)" mat-icon-button class="example-icon"
@@ -260,3 +260,4 @@
         </div>
     </div>
 <!-- </block-ui> -->
+

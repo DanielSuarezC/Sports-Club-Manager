@@ -13,6 +13,7 @@ import { TorneoService } from 'src/app/servicios/torneo/torneo.service';
 import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component';
 import { TorneoDeportistaService } from 'src/app/servicios/torneo_deportista/torneo-deportista.service';
 import { TorneoDeportista } from 'src/app/modelo/torneo_deportista/torneo-deportista';
+import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
 
 @Component({
   selector: 'app-detallestorneo',
@@ -33,7 +34,7 @@ export class DetallestorneoComponent {
   // @BlockUI() blockUI: NgBlockUI;
 
 
-    constructor(private serviceTorneo_deportista: TorneoDeportistaService,private service: TorneoService,private serviceDeportistaInscrito: DeportistaService,private fb: FormBuilder,private dialog: MatDialog, private route: Router) {
+    constructor(private serviceTorneo_deportista: TorneoDeportistaService,private service: TorneoService,private fb: FormBuilder,private dialog: MatDialog, private route: Router) {
     const navigation = this.route.getCurrentNavigation();
     if (navigation?.extras.state) {
       this.datoMaestro = navigation.extras.state['torneo'];
@@ -157,10 +158,6 @@ export class DetallestorneoComponent {
     
   }
 
-  consultarUsuarios(){
-
-  }
-
   llenarCampos(row?: Torneo) {
   
     this.form1.patchValue({
@@ -223,5 +220,21 @@ export class DetallestorneoComponent {
      );
 
   }
+
+  //...
+  darkTheme: NgxMaterialTimepickerTheme = {
+    container: {
+        bodyBackgroundColor: '#424242',
+        buttonColor: '#fff'
+    },
+    dial: {
+        dialBackgroundColor: '#555',
+    },
+    clockFace: {
+        clockFaceBackgroundColor: '#555',
+        clockHandColor: '#CE93D8',
+        clockFaceTimeInactiveColor: '#CE93D8'
+    }
+};
 
 }
