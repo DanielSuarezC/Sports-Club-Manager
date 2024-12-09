@@ -4,6 +4,7 @@ export class Torneo {
     modalidad: string;
     fecha: Date;
     estado: string;
+    idclub: number;
 }
 
 export interface TorneoResponse{

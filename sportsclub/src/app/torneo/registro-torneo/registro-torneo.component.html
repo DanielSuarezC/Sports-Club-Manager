@@ -65,7 +65,16 @@
                                         <mat-datepicker #picker3></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <div class="contenedorInterno"></div>
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>Club</mat-label>
+                                        <mat-select formControlName="idclub">
+                                            <mat-option *ngFor="let club of clubes" [value]="club.idclub">
+                                                {{ club.nombre }}
+                                              </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
                                 <br>
                                 <button type="submit" mat-raised-button color="primary" >
                                     <mat-icon>save</mat-icon>

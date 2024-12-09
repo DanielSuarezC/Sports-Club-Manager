@@ -20,4 +20,22 @@ export class TorneoService {
   public consultarTorneos(): Observable<TorneoResponse> {
     return this.httpClient.get<TorneoResponse>(this.baseUrl + 'getAll.php');
   }
+
+  public consultarTorneosbyFilters(idtorneo: number, nombre: string, modalidad: string, estado: string, fecha: number, idclub: number): Observable<TorneoResponse> {
+    // Crear un objeto con los datos a enviar
+    const payload = {
+        idtorneo: idtorneo || 0,
+        nombre: nombre || "",
+        modalidad: modalidad || "",
+        estado: estado || "",
+        fecha: fecha || 0,
+        idclub: idclub || 0
+    };
+
+    // Realizar una solicitud POST con el JSON al backend
+    return this.httpClient.post<TorneoResponse>(
+        this.baseUrl + 'getbyFilters.php', // URL de la API
+        JSON.stringify(payload)           // Convertir el objeto a JSON                   
+    );
+ }
 }
