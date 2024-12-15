@@ -60,7 +60,7 @@
                                         <mat-label>Club</mat-label>
                                         <mat-select formControlName="idclub">
                                             <mat-option *ngFor="let club of clubes" [value]="club.idclub">
-                                                {{ club.nombre }}
+                                                 {{ club.nombre }} | Id: {{club.idclub}} 
                                               </mat-option>
                                         </mat-select>
                                     </mat-form-field>

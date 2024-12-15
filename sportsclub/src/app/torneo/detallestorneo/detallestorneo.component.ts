@@ -14,6 +14,7 @@ import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component'
 import { TorneoDeportistaService } from 'src/app/servicios/torneo_deportista/torneo-deportista.service';
 import { TorneoDeportista } from 'src/app/modelo/torneo_deportista/torneo-deportista';
 import { NgxMaterialTimepickerTheme } from 'ngx-material-timepicker';
+import { Club } from 'src/app/modelo/club/club';
 
 @Component({
   selector: 'app-detallestorneo',
@@ -25,6 +26,7 @@ export class DetallestorneoComponent {
   datoMaestro: Torneo = new Torneo();
   datoTorneoDeportista: TorneoDeportista = new TorneoDeportista();
   form1: FormGroup;
+  clubes: Club[] = [];
 
   displayedColumns: string[] = ['nombres', 'cedula', 'email','telefono','categoria','elo','torneo','horainicio','horafin','icon'];
   displayedColumnsNoInscritos: string[] = ['nombres', 'cedula', 'email','telefono','categoria','elo','club','estado','icon'];
@@ -101,6 +103,7 @@ export class DetallestorneoComponent {
       modalidad: ['', Validators.required],
       estado: [''],
       fecha: ['', Validators.required],
+      idclub: [''],
       horainicio : [''],
       horafin:['']
     });
@@ -108,7 +111,10 @@ export class DetallestorneoComponent {
 
     if(this.datoMaestro.idtorneo){
       this.form1.get('idtorneo')?.disable();
+      this.form1.get('idclub')?.disable();
     }
+
+    
   }
  
 
@@ -127,8 +133,6 @@ export class DetallestorneoComponent {
         },
         error: (err) =>{
           console.log(err);
-          // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
-          //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
             Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
         }
       });
@@ -165,7 +169,8 @@ export class DetallestorneoComponent {
       nombre: row?.nombre  || '',
       modalidad: row?.modalidad  || '',
       estado: row?.estado  || '',
-      fecha: row?.fecha|| ''
+      fecha: row?.fecha|| '',
+      idclub: row?.idclub || '',
     });
   }
 

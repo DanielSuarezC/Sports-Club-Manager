@@ -21,13 +21,14 @@ export class DeportistaService {
     return this.httpClient.get<DeportistaResponse>(this.baseUrl + 'getAll.php');
   }
 
-  public consultarDeportistasbyFilters(dep_cedula: number, nombre: string, categoria: string, estado: string): Observable<DeportistaResponse> {
+  public consultarDeportistasbyFilters(dep_cedula: number, nombre: string, categoria: string, estado: string,idclub: number): Observable<DeportistaResponse> {
     // Crear un objeto con los datos a enviar
     const payload = {
         dep_cedula: dep_cedula || 0,
         nombre: nombre || "",
         categoria: categoria || "",
-        estado: estado || ""
+        estado: estado || "",
+        idclub: idclub || 0
     };
 
     // Realizar una solicitud POST con el JSON al backend

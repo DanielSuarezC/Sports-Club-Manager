@@ -63,23 +63,28 @@
                                         <mat-datepicker #picker3></mat-datepicker>
                                     </mat-form-field>
                                 </div>
-                                <br><br>
-                                <div class="contenedorHoras">
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
+                                        <mat-label>ID Club</mat-label>
+                                        <input formControlName="idclub" matInput placeholder="ID Club">
+                                    </mat-form-field>
+                                </div>
+                                <!-- <div class="contenedorHoras"> -->
                                     <mat-form-field>
                                         <mat-label> Hora inicio</mat-label>
                                         <input formControlName="horainicio" matInput [ngxTimepicker]="picker">
                                         <ngx-material-timepicker #picker [theme]="darkTheme"></ngx-material-timepicker>
                                       </mat-form-field>
     
-                                </div>
+                                <!-- </div> -->
 
-                                <div class="contenedorHoras">
+                                <!-- <div class="contenedorHoras"> -->
                                     <mat-form-field>
                                         <mat-label>Hora de finalizacion</mat-label>
                                         <input formControlName="horafin" matInput [ngxTimepicker]="picker2">
                                         <ngx-material-timepicker #picker2 [theme]="darkTheme"></ngx-material-timepicker>
                                       </mat-form-field>
-                                </div>
+                                <!-- </div> -->
 
                                 <br>
                                 <button type="submit" mat-raised-button color="primary" >

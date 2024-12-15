@@ -30,7 +30,7 @@ export class EntrenamientoService {
         tipo: tipo || "",
         jornada: jornada || "",
         estado: estado || "",
-        ent_cedula: ent_cedula || 0
+        ent_cedula: ent_cedula || 0,
     };
 
     // Realizar una solicitud POST con el JSON al backend

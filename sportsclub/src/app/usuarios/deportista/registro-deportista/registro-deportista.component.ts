@@ -115,7 +115,7 @@ export class RegistroDeportistaComponent implements OnInit, AfterViewInit{
       email: row?.email  || '',
       telefono:row?.telefono  || '',
       categoria:row?.categoria  || '',
-      Elo: row?.elo  || '',
+      elo: row?.elo  || '',
       idclub: row?.idclub  || '',
       estado:row?.estado  || ''
     });

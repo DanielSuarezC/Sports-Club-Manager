@@ -21,13 +21,14 @@ export class AdministrativoService {
     return this.httpClient.get<AdministrativoResponse>(this.baseUrl + 'getAll.php');
   }
 
-  public consultarAdministrativosbyFilters(adm_cedula: number, nombre: string, cargo: string, estado: string): Observable<AdministrativoResponse> {
+  public consultarAdministrativosbyFilters(adm_cedula: number, nombre: string, cargo: string, estado: string, idclub: number): Observable<AdministrativoResponse> {
     // Crear un objeto con los datos a enviar
     const payload = {
         adm_cedula: adm_cedula || 0,
         nombre: nombre || "",
         cargo: cargo || "",
-        estado: estado || ""
+        estado: estado || "",
+        idclub: idclub || 0
     };
 
     // Realizar una solicitud POST con el JSON al backend

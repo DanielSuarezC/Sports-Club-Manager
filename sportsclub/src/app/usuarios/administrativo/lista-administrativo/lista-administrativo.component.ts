@@ -6,6 +6,7 @@ import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { NavigationExtras, Router } from '@angular/router';
 import { Administrativo } from 'src/app/modelo/administrativo/administrativo';
+import { Club } from 'src/app/modelo/club/club';
 import { ClubService } from 'src/app/servicios/club/club.service';
 import { AdministrativoService } from 'src/app/servicios/usuarios/administrativo/administrativo.service';
 import Swal from 'sweetalert2';
@@ -19,6 +20,7 @@ export class ListaAdministrativoComponent implements OnInit{
   displayedColumns: string[] = ['nombre','adm_cedula', 'email','telefono','cargo','sueldo','club','estado','icon'];
   dataSource: MatTableDataSource<Administrativo> =  new MatTableDataSource();
   cantidadRegistros: number;
+  clubes: Club[] = [];
   
   form1: FormGroup;
   
@@ -35,16 +37,23 @@ export class ListaAdministrativoComponent implements OnInit{
       adm_cedula: [''],
       nombre: [''],
       cargo: [''],
-      estado: ['']
+      estado: [''],
+      idclub: ['']
     })
     this.consultarAdministrativos();
+    this.consultarClubes();
   }
 
   consultarAdministrativos(): void {
     // this.blockUI.start();
+    let adm_cedula = this.form1.get('adm_cedula')?.value;
+    let nombre = this.form1.get('nombre')?.value;
+    let cargo = this.form1.get('cargo')?.value;
+    let estado = this.form1.get('estado')?.value;
+    let idclub = this.form1.get('idclub')?.value;
 
-    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
-      // this.consultarClubesbyFilters();
+    if(adm_cedula || nombre || cargo || estado || idclub){
+      this.consultarAdministrativosbyFilters(adm_cedula, nombre, cargo, estado, idclub);
     }else{
       this.service.consultarAdministrativos()
       .subscribe({
@@ -65,12 +74,32 @@ export class ListaAdministrativoComponent implements OnInit{
     }
   }
 
+  consultarAdministrativosbyFilters(adm_cedula: number, nombre: string, cargo: string, estado: string, idclub: number):void{
+    this.service.consultarAdministrativosbyFilters(adm_cedula, nombre, cargo, estado,idclub)
+    .subscribe({
+      next: (response) =>{
+        console.log('Response: '+ response.value);
+        this.dataSource.data = response.value;
+        // this.cantidadRegistros = response.value.length;
+        console.log('Datos en dataSource:', this.dataSource.data); // Verifica que se guarden correctamente
+        this.form1.reset();
+      },
+      error: (err) =>{
+        console.log(err);
+        // this.dialog.open(MensajeComponent, {data: {titulo: 'Error',
+        //   mensaje: 'Error al mostrar clubes. ' + err, textoBoton: 'Aceptar' }});
+          Swal.fire('Error','Error al mostrar los usuarios. '+ err.message,'error');
+      }
+    });
+  }
+
+
   consultarClubes(): any {
     // this.blockUI.start();
       this.clubService.consultarClubes()
       .subscribe({
         next: (response) =>{
-          return response.value;
+          this.clubes = response.value;
         },
         error: (err) =>{
           console.log(err);

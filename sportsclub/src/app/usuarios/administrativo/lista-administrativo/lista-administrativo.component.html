@@ -38,6 +38,17 @@
 
                                 <div class="contenedorInterno">
                                     <mat-form-field class="full-width" >
+                                        <mat-label>Club</mat-label>
+                                        <mat-select formControlName="idclub">
+                                            <mat-option *ngFor="let club of clubes" [value]="club.idclub">
+                                                {{ club.nombre }} | Id: {{club.idclub}}
+                                              </mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+
+                                <div class="contenedorInterno">
+                                    <mat-form-field class="full-width" >
                                         <mat-label>Estado</mat-label>
                                         <mat-select formControlName="estado">
                                             <mat-option>...</mat-option>

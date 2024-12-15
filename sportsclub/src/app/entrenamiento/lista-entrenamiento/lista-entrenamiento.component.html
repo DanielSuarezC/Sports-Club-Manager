@@ -61,7 +61,7 @@
                                         <mat-label>Entrenador encargado</mat-label>
                                         <mat-select formControlName="ent_cedula">
                                             <mat-option *ngFor="let entrenador of entrenadores" [value]="entrenador.ent_cedula" >
-                                            {{entrenador.nombre}}
+                                            {{entrenador.nombre}} | CC: {{entrenador.ent_cedula}}
                                             </mat-option>
                                         </mat-select>
                                     </mat-form-field>
@@ -70,7 +70,7 @@
                         </form>
                         <div class="contenedor">
                             <br>
-                            <button (click)="consultarEntrenamientosbyFilters()" mat-raised-button color="primary">
+                            <button (click)="consultarEntrenamientos()" mat-raised-button color="primary">
                                 <mat-icon>search</mat-icon>
                                 Consultar
                             </button>
@@ -100,7 +100,7 @@
                                 </ng-container>
     
                                 <ng-container matColumnDef="ent_cedula">
-                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cedula entrenador </th>
+                                    <th mat-header-cell *matHeaderCellDef mat-sort-header> Cédula entrenador </th>
                                     <td mat-cell *matCellDef="let element"> {{element.ent_cedula}}</td>
                                 </ng-container>
 

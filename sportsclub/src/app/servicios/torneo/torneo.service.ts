@@ -21,14 +21,14 @@ export class TorneoService {
     return this.httpClient.get<TorneoResponse>(this.baseUrl + 'getAll.php');
   }
 
-  public consultarTorneosbyFilters(idtorneo: number, nombre: string, modalidad: string, estado: string, fecha: number, idclub: number): Observable<TorneoResponse> {
+  public consultarTorneosbyFilters(idtorneo: number, nombre: string, modalidad: string, estado: string, fecha: Date, idclub: number): Observable<TorneoResponse> {
     // Crear un objeto con los datos a enviar
     const payload = {
         idtorneo: idtorneo || 0,
         nombre: nombre || "",
         modalidad: modalidad || "",
         estado: estado || "",
-        fecha: fecha || 0,
+        fecha: fecha || new Date(),
         idclub: idclub || 0
     };
 

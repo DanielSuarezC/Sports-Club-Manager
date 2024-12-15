@@ -21,13 +21,14 @@ export class EntrenadorService {
     return this.httpClient.get<EntrenadorResponse>(this.baseUrl + 'getAll.php');
   }
 
-  public consultarEntrenadoressbyFilters(ent_cedula: number, nombre: string, tituloFide: string, estado: string): Observable<EntrenadorResponse> {
+  public consultarEntrenadoressbyFilters(ent_cedula: number, nombre: string, tituloFide: string, estado: string,idclub: number): Observable<EntrenadorResponse> {
     // Crear un objeto con los datos a enviar
     const payload = {
         ent_cedula: ent_cedula || 0,
         nombre: nombre || "",
         tituloFide: tituloFide || "",
-        estado: estado || ""
+        estado: estado || "",
+        idclub: idclub || 0
     };
 
     // Realizar una solicitud POST con el JSON al backend

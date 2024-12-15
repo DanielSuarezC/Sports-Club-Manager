@@ -43,13 +43,20 @@ export class ListaTorneoComponent implements OnInit{
       idclub: ['']
     })
     this.consultarTorneos();
+    this.consultarClubes();
   }
 
   consultarTorneos(): void {
     // this.blockUI.start();
+    let idtorneo = this.form1.get('idtorneo')?.value;
+    let nombre = this.form1.get('nombre')?.value;
+    let modalidad = this.form1.get('modalidad')?.value;
+    let estado = this.form1.get('estado')?.value;
+    let fecha = this.form1.get('fecha')?.value;
+    let idclub = this.form1.get('idclub')?.value;
 
-    if(this.form1.get('adm_cedula')?.value || this.form1.get('nombre')?.value || this.form1.get('cargo')?.value){
-      this.consultarTorneosbyFilters();
+    if(idtorneo || nombre || modalidad || estado || fecha || idclub){
+      this.consultarTorneosbyFilters(idtorneo, nombre, modalidad, estado, fecha, idclub);
     }else{
       this.service.consultarTorneos()
       .subscribe({
@@ -69,13 +76,8 @@ export class ListaTorneoComponent implements OnInit{
     }
   }
 
-  consultarTorneosbyFilters():void{
-    let idtorneo = this.form1.get('idtorneo')?.value;
-    let nombre = this.form1.get('nombre')?.value;
-    let modalidad = this.form1.get('modalidad')?.value;
-    let estado = this.form1.get('estado')?.value;
-    let fecha = this.form1.get('fecha')?.value;
-    let idclub = this.form1.get('idclub')?.value;
+  consultarTorneosbyFilters(idtorneo: number, nombre: string, modalidad:string, estado: string, fecha: Date, idclub:number):void{
+
 
     this.service.consultarTorneosbyFilters(idtorneo, nombre, modalidad, estado, fecha, idclub)
     .subscribe({

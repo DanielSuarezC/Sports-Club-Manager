@@ -4,6 +4,7 @@ import { MAT_DIALOG_DATA, MatDialog } from '@angular/material/dialog';
 import { disableDebugTools } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { MensajeComponent } from 'src/app/componentes/mensaje/mensaje.component';
+import { Club } from 'src/app/modelo/club/club';
 import { Entrenador } from 'src/app/modelo/entrenador/entrenador';
 import { Entrenamiento } from 'src/app/modelo/entrenamiento/entrenamiento';
 import { EntrenamientoService } from 'src/app/servicios/entrenamiento/entrenamiento.service';
@@ -18,6 +19,7 @@ import Swal from 'sweetalert2';
 export class RegistroEntrenamientoComponent {
   datoMaestro: Entrenamiento = new Entrenamiento();
   entrenadores: Entrenador[] = [];
+
   form1: FormGroup;
   // @BlockUI() blockUI: NgBlockUI;
 
@@ -35,6 +37,7 @@ export class RegistroEntrenamientoComponent {
     this.datoMaestro.jornada = this.form1.get('jornada')?.value;
     this.datoMaestro.ent_cedula = this.form1.get('ent_cedula')?.value;
     this.datoMaestro.estado = this.form1.get('estado')?.value;
+
 
 
     this.service.guardar(this.datoMaestro).pipe().subscribe({
