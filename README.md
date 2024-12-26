@@ -1,7 +1,7 @@
 # BBDD-Sports-Club-Manager
 Un prototipo de la aplicación Sports Club manager para la asignatura de Bases de datos II.
 La cual propone administrar los miembros del club, así como sus torneos, entrenamientos y reuniones.
-
+Developed Angular Version 16.2.16
 
 ## Prototipo
 Inicio - Home
